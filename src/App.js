@@ -1,56 +1,41 @@
 import React, {Component} from 'react'
-import './App.css'
+import {Route} from 'react-router-dom'
+import SettingsPage from "./containers/SettingsPage"
+import HomePage from "./containers/HomePage"
+import NotFoundPage from "./containers/NotFoundPage"
+import {AnimatedSwitch} from 'react-router-transition'
+import {connect} from "react-redux"
+import {addLocaleData, IntlProvider} from 'react-intl'
+import zh from 'react-intl/locale-data/zh'
+import en from 'react-intl/locale-data/en'
+import {getLocale} from "./locales"
+import {BrowserRouter} from 'react-router-dom'
 
-const slogan = [
-    "优秀，\n是一种习惯。",
-    "优秀，\n是与生俱来的天赋。",
-    "我爱工作，",
-    "工作使我快乐。",
-    "我徜徉在工作的海洋里，",
-    "上司叫我吃饭，\n我充耳不闻，",
-    "同事喊我喝水，\n我无动于衷，",
-    "老板喊我睡觉,\n我百般推辞。"
-]
+addLocaleData([...en, ...zh])
 
 class App extends Component {
-
-    state = {
-        index: 0
-    }
-
-    componentDidMount() {
-        this.intervals = setInterval(() => {
-            let i = this.state.index + 1
-            if (i >= slogan.length) i = 0
-            this.setState({
-                index: i
-            })
-        }, 1500)
-    }
-
-    componentWillUnmount() {
-        if (this.intervals !== undefined) {
-            clearInterval(this.intervals)
-        }
-    }
-
     render() {
-        const renderSlogan = () => {
-            let s = ""
-            if (this.state.index < slogan.length) {
-                s = slogan[this.state.index]
-            }
-            return <div className={"slogan"}>{s}</div>
-        }
-
         return (
-            <div>
-                <div className={"center"}>
-                    {renderSlogan()}
-                </div>
-            </div>
+            <IntlProvider {...getLocale(this.props.language)}>
+                <BrowserRouter>
+                    <AnimatedSwitch
+                        atEnter={{opacity: 0}}
+                        atLeave={{opacity: 0}}
+                        atActive={{opacity: 1}}>
+                        <Route exact path="/" component={HomePage}/>
+                        <Route exact path="/settings" component={SettingsPage}/>
+                        <Route component={NotFoundPage}/>
+                    </AnimatedSwitch>
+                </BrowserRouter>
+            </IntlProvider>
         )
     }
 }
 
-export default App
+export default connect((state) => {
+    return {
+        nightMode: state.nightMode,
+        language: state.language
+    }
+})(App)
+
