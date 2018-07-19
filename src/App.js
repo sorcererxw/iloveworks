@@ -1,41 +1,47 @@
 import React, {Component} from 'react'
-import {Route} from 'react-router-dom'
-import SettingsPage from "./containers/SettingsPage"
+
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
+
 import HomePage from "./containers/HomePage"
-import NotFoundPage from "./containers/NotFoundPage"
-import {AnimatedSwitch} from 'react-router-transition'
-import {connect} from "react-redux"
-import {addLocaleData, IntlProvider} from 'react-intl'
+import SettingsPage from "./containers/SettingsPage"
+
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faEllipsisV, faCog, faAdjust, faAngleLeft, faTimes, faBars} from '@fortawesome/free-solid-svg-icons'
+
+import {connect} from 'react-redux'
+
+import {getLocale} from './locale'
+
+import {addLocaleData, IntlProvider} from "react-intl"
 import zh from 'react-intl/locale-data/zh'
 import en from 'react-intl/locale-data/en'
-import {getLocale} from "./locales"
-import {BrowserRouter} from 'react-router-dom'
 
 addLocaleData([...en, ...zh])
+
+library.add(faEllipsisV, faCog, faAdjust, faAngleLeft, faTimes, faBars)
 
 class App extends Component {
     render() {
         return (
-            <IntlProvider {...getLocale(this.props.language)}>
+            <IntlProvider
+                locale={navigator.language}
+                messages={getLocale(this.props.language)}>
                 <BrowserRouter>
-                    <AnimatedSwitch
-                        atEnter={{opacity: 0}}
-                        atLeave={{opacity: 0}}
-                        atActive={{opacity: 1}}>
+                    <Switch>
                         <Route exact path="/" component={HomePage}/>
-                        <Route exact path="/settings" component={SettingsPage}/>
-                        <Route component={NotFoundPage}/>
-                    </AnimatedSwitch>
+                        <Route path="/settings" component={SettingsPage}/>
+                        <Route render={() => <Redirect to={'/'}/>}/>
+                    </Switch>
                 </BrowserRouter>
             </IntlProvider>
         )
     }
 }
 
-export default connect((state) => {
+const mapStateToProps = state => {
     return {
-        nightMode: state.nightMode,
-        language: state.language
+        language: state.settings.language
     }
-})(App)
+}
 
+export default connect(mapStateToProps, null)(App)

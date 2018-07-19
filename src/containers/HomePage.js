@@ -1,58 +1,107 @@
 import React, {Component} from 'react'
-import {Icon, Row, Col} from 'antd'
 import ShiftTextComponent from "../components/ShiftTextComponent"
-import {injectIntl, defineMessages} from "react-intl"
-import {connect} from 'react-redux'
-
-const messages = defineMessages({
-    defaultSlogan: {id: 'slogan.default'}
-})
+import './HomePage.css'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {Link} from "react-router-dom"
+import {connect} from "react-redux"
+import getTheme from "../theme"
+import {defineMessages, injectIntl} from "react-intl"
 
 class HomePage extends Component {
-
     state = {
-        displayHeader: false
+        displayMouse: true
+    }
+
+    handleIconMouseEnter = () => {
+    }
+
+    handleIconMouseLeave = () => {
+    }
+
+    getSlogan = () => {
+        let slogan = ''
+        if (this.props.slogan === undefined
+            || this.props.slogan == null
+            || this.props.slogan.trim().length === 0) {
+            const messages = defineMessages({
+                defaultSlogan: {
+                    id: 'slogan.default'
+                }
+            })
+            const {intl} = this.props
+            slogan = intl.formatMessage(messages.defaultSlogan)
+        } else {
+            slogan = this.props.slogan
+        }
+        return slogan.split('\n')
+            .filter(item => item !== undefined && item != null)
+            .map(item => item.trim())
+            .filter(item => item.length > 0)
+    }
+
+    mouseCountdown = undefined
+
+    handleMouseMove = () => {
+        if (!this.state.displayMouse) {
+            this.setState({
+                displayMouse: true
+            })
+        }
+        if (this.mouseCountdown !== undefined) {
+            window.clearTimeout(this.mouseCountdown)
+            this.mouseCountdown = undefined
+        }
+        this.mouseCountdown = window.setTimeout(
+            () => this.setState({
+                displayMouse: false
+            }), 2000)
     }
 
     render() {
-        const {sloganList, intl} = this.props
-
+        const {theme} = this.props
+        const palette = getTheme(theme)
         return (
-            <div>
-                {this.state.displayHeader ?
-                    <div>
-                        <Icon
-                            type={"setting"}
-                            onClick={() => {
-                                this.props.history.push("/settings")
-                            }}/>
+            <div style={{
+                background: palette.background,
+                cursor: this.state.displayMouse ? 'default' : 'none'
+            }}
+                 onMouseMove={this.handleMouseMove}
+                 className={"root"}>
+                <header className={"home-header"} style={{
+                    borderColor: palette.textSecondary
+                }}>
+                    <div className={"header-container"}>
+                        <div style={{flex: 1}}/>
+                        <Link to={'/settings'}>
+                            <FontAwesomeIcon
+                                className={"icon"}
+                                onMouseEnter={this.handleIconMouseEnter}
+                                onMouseLeave={this.handleIconMouseLeave}
+                                color={palette.textSecondary}
+                                size={'2x'}
+                                icon={"cog"}/>
+                        </Link>
                     </div>
-                    : null
-                }
-                <Row
-                    type="flex"
-                    justify="space-around"
-                    align="middle"
-                    style={{height: '100%', width: "100%"}}>
-                    <Col/>
-                    <Col span={24} style={{height: '100%'}}>
-                        <ShiftTextComponent
-                            mode={'type'}
-                            interval={200}
-                            textList={
-                                sloganList ? sloganList
-                                    : intl.formatMessage(messages.defaultSlogan)}
-                        />
-                    </Col>
-                    <Col/>
-                </Row>
+                </header>
+                <main className={"home-main"}>
+                    <ShiftTextComponent
+                        textAlign={'center'}
+                        fontColor={palette.textPrimary}
+                        fontSize={72}
+                        slogan={this.getSlogan()}
+                    />
+                </main>
             </div>
         )
     }
 }
 
-export default connect((state) => {
+const mapStateToProps = state => {
     return {
-        sloganList: state.sloganList
+        language: state.settings.language,
+        theme: state.settings.theme,
+        slogan: state.settings.slogan
     }
-})(injectIntl(HomePage))
+}
+
+export default connect(mapStateToProps)(injectIntl(HomePage))

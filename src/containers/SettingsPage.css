@@ -1,0 +1,145 @@
+.setting-root {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 20px 20px 40px 40px;
+}
+
+.setting-header {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: row;
+    padding: 16px;
+    border: 0 solid;
+    border-bottom-width: 1px;
+    margin-bottom: 16px;
+}
+
+.setting-header-title {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.setting-main {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.setting-nav {
+    padding: 16px;
+    border: 0 solid;
+    border-right-width: 1px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-nav > .selected {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.setting-nav > a:hover {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.setting-nav > a {
+    color: inherit;
+    white-space: nowrap;
+    text-decoration: none;
+    padding: 8px 32px 8px 16px;
+    list-style-type: none;
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+
+.form {
+    width: 100%;
+    padding: 0 0 16px 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-item-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.theme-block-group {
+    width: 100%;
+}
+
+.theme-block {
+    display: inline-block;
+    margin: 8px;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 16px;
+    user-select: none;
+    font-size: 1rem;
+}
+
+.slogan-textarea {
+    font-size: 1.2rem;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 16px;
+    line-height: 1.5rem;
+    min-height: 10rem;
+    resize: none;
+    overflow: hidden;
+}
+
+.slogan-textarea:focus {
+    outline-style: none;
+}
+
+.button-bar {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.button-bar > button {
+    margin-left: 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 1rem;
+    border-radius: 4px;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.tab-title {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.preference-item {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border: 0 solid;
+    border-bottom-width: 1px;
+}
+
+.setting-select {
+    font-size: 1rem;
+    padding: auto 0;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 50px;
+    height: auto;
+    border-color: rgb(169, 169, 169);
+}

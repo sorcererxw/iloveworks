@@ -3,21 +3,19 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import registerServiceWorker from './utils/registerServiceWorker'
-import {BrowserRouter} from 'react-router-dom'
-import {Provider} from 'react-redux'
-import reducers from "./reducers/SettingsReducer"
-import {createStore} from "redux"
+import configureStore from "./redux/configureStore"
+import {Provider} from "react-redux"
 import {PersistGate} from 'redux-persist/integration/react'
+import {persistStore} from "redux-persist"
 
-const store = createStore(
-    reducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+const store = configureStore()
 
-ReactDOM.render((
+ReactDOM.render(
     <Provider store={store}>
-        <App/>
-    </Provider>
-), document.getElementById('root'))
+        <PersistGate persistor={persistStore(store)}>
+            <App/>
+        </PersistGate>
+    </Provider>,
+    document.getElementById('root'))
 
 registerServiceWorker()

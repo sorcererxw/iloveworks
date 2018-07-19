@@ -2,143 +2,70 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
 class ShiftTextComponent extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            displayText: ''
-        }
+    static propTypes = {
+        fontSize: PropTypes.number,
+        fontColor: PropTypes.string,
+        textAlign: PropTypes.oneOf(['center', 'left', 'right']),
+        slogan: PropTypes.array
+    }
 
-        this.update = this.update.bind(this)
+    static defaultProps = {
+        fontSize: 64,
+        fontColor: '#000',
+        textAlign: 'left',
+        slogan: []
+    }
+
+    index = 0
+
+    state = {
+        displayText: ""
+    }
+
+    updateIndex = () => {
+        const slogan = this.props.slogan
+        if (slogan === undefined) {
+            this.setState({
+                displayText: ""
+            })
+        } else {
+            if (this.index >= slogan.length) {
+                this.index = 0
+            }
+            this.setState({
+                displayText: slogan[this.index]
+            })
+            this.index++
+        }
     }
 
     componentDidMount() {
-        this.textList = this.props.textList ? this.props.textList : defaultProps.textList
-        this.textIndex = -1
-        this.charIndex = -1
-        this.indexGrow = true
-        this.setState({
-            displayText: ''
-        })
-
-        this.intervals = setInterval(
-            this.update,
-            this.props.interval ? this.props.interval : 1000
-        )
-    }
-
-    update() {
-        if (this.waiting) {
-            this.waiting--
-            return
-        }
-        const textList = this.textList
-        if (textList === undefined || textList.length === 0) {
-            this.setState({
-                displayText: ''
-            })
-            return
-        }
-        const mode = this.props.mode
-        const getNextTextIndex = ((textList, currentIndex) => {
-            if (isNaN(currentIndex)) return 0
-            if (currentIndex < 0) return 0
-            if (currentIndex >= textList.length - 1) return 0
-            return currentIndex + 1
-        })
-        if (mode === 'type') {
-            if (this.textIndex < 0 || isNaN(this.textIndex) || this.textIndex >= textList.length)
-                this.textIndex = 0
-            const currentText = textList[this.textIndex]
-            if (this.indexGrow) {
-                if (this.charIndex + 1 === currentText.length) {
-                    this.indexGrow = false
-                    this.setState({
-                        displayText: currentText
-                    })
-                    this.waiting = 3
-                } else {
-                    this.charIndex++
-                    this.setState({
-                        displayText: currentText.substring(0, this.charIndex)
-                    })
-                }
-            } else {
-                if (this.charIndex === 0) {
-                    this.indexGrow = true
-                    this.textIndex = getNextTextIndex(textList, this.textIndex)
-                    this.setState({
-                        displayText: ''
-                    })
-                    this.waiting = 1
-                } else {
-                    this.charIndex--
-                    this.setState({
-                        displayText: currentText.substring(0, this.charIndex)
-                    })
-                }
-            }
-        } else {
-            const nextTextIndex = getNextTextIndex(textList, this.textIndex)
-            const text = textList[nextTextIndex]
-            this.setState({
-                textIndex: nextTextIndex,
-                displayText: text
-            })
-        }
+        this.timer = setInterval(this.updateIndex, 1000)
     }
 
     componentWillUnmount() {
-        if (this.intervals !== undefined) {
-            clearInterval(this.intervals)
+        if (this.timer !== undefined) {
+            clearInterval(this.timer)
         }
     }
 
     render() {
-        if (this.state.displayText === undefined
-            || this.state.displayText == null
-            || this.state.displayText.length === 0) return null
-        const arr = this.state.displayText.split('|').filter(item => {
-            return item !== undefined && item != null && item.length > 0
-        })
-        const displayList = []
-        let iteratorKey = 0
-        for (let i = 0; i < arr.length; i++) {
-            if (i > 0) displayList.push(<br key={iteratorKey++}/>)
-            displayList.push(
-                <b key={iteratorKey++} style={styles.slogan}>
-                    {arr[i]}
-                </b>
-            )
+        const split = this.state.displayText.split("|")
+        const display = []
+        let idx = 0
+        for (let i = 0; i < split.length; i++) {
+            if (i > 0) {
+                display.push(<br key={idx++}/>)
+            }
+            display.push(<span key={idx++}>{split[i]}</span>)
         }
-        return (
-            <div>
-                {displayList}
-            </div>
-        )
+        return <div style={{
+            userSelect: 'none',
+            textAlign: this.props.textAlign,
+            fontSize: this.props.fontSize,
+            color: this.props.fontColor
+        }}>{display}</div>
     }
-}
-
-ShiftTextComponent.propTypes = {
-    interval: PropTypes.number,
-    textList: PropTypes.arrayOf(PropTypes.string),
-    mode: PropTypes.oneOf(['none', 'type', 'fade'])
-}
-
-const defaultProps = {
-    mode: 'none',
-    textList: [],
-    interval: 1000
-}
-
-ShiftTextComponent.defaultProps = defaultProps
-
-const styles = {}
-styles.slogan = {
-    fontSize: 64,
-    fontWeight: 600,
-    textAlign: 'center',
-    userSelect: 'none',
-    color: '#111111',
 }
 
 export default ShiftTextComponent
