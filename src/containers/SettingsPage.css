@@ -57,40 +57,39 @@
         width: 100%;
         height: auto;
         overflow: auto;
-        overflow-y: hidden;
     }
 
-    .setting-nav::-webkit-scrollbar-track {
-        display: none;
+    .setting-nav::-webkit-scrollbar {
+        width: 0 !important;
     }
-}
-
-.setting-nav > .selected {
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-.setting-nav > a:hover {
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .setting-nav > a {
-    color: inherit;
-    white-space: nowrap;
     text-decoration: none;
     padding: 8px 32px 8px 16px;
-    list-style-type: none;
     margin-bottom: 16px;
     margin-right: 8px;
     font-size: 1rem;
     font-weight: 500;
 }
 
+@media (min-width: 768px) {
+    .setting-nav > a:hover {
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+}
+
 @media (max-width: 768px) {
     .setting-nav > a {
         padding: 8px 16px 8px 16px;
+        margin-right: 8px;
     }
+}
+
+.setting-nav > .selected {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .form {
