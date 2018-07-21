@@ -13,7 +13,6 @@ import ShiftTextComponent from "../components/ShiftTextComponent"
 import PreferenceItem from "../components/PreferenceItem"
 import PreferenceGroup from "../components/PerferenceGroup"
 import {Helmet} from "react-helmet"
-import {Scrollbars} from "react-custom-scrollbars"
 
 class LanguageTab extends Component {
     onSelect = (e) => {
