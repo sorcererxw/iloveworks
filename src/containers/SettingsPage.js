@@ -53,7 +53,7 @@ class AboutTab extends Component {
             {text =>
                 <PreferenceGroup title={text}>
                     <PreferenceItem>
-                        <div>💼 Version 1.0</div>
+                        <div><span role={'img'} aria-label={'logo'}>💼</span> Version 1.0</div>
                     </PreferenceItem>
                     <PreferenceItem>
                         <div>
