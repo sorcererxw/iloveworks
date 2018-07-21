@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, HashRouter, Redirect, Route, Switch} from 'react-router-dom'
 
 import HomePage from "./containers/HomePage"
 import SettingsPage from "./containers/SettingsPage"
@@ -37,7 +37,7 @@ class App extends Component {
             <IntlProvider
                 locale={navigator.language}
                 messages={getLocale(this.props.language)}>
-                <BrowserRouter>
+                <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <div>
                         <FormattedMessage id={"appName"}>
                             {appName =>
@@ -49,9 +49,9 @@ class App extends Component {
                             }
                         </FormattedMessage>
                         <Switch>
-                            <Route exact path="/" component={HomePage}/>
-                            <Route path="/settings" component={SettingsPage}/>
-                            <Route render={() => <Redirect to={'/'}/>}/>
+                            <Route exact path={`/`} component={HomePage}/>
+                            <Route path={`/settings`} component={SettingsPage}/>
+                            <Route render={() => <Redirect to={`/`}/>}/>
                         </Switch>
                     </div>
                 </BrowserRouter>

@@ -420,7 +420,7 @@ class SettingsPage extends Component {
                         <FormattedMessage id="settings"/>
                     </div>
                     <div style={{flex: 1}}/>
-                    <Link to={'/'}>
+                    <Link to={`/`}>
                         <FontAwesomeIcon icon={"times"} color={palette.textPrimary} size={'lg'}/>
                     </Link>
                 </header>

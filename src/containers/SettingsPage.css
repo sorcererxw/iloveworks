@@ -70,6 +70,7 @@
     margin-bottom: 16px;
     margin-right: 8px;
     font-size: 1rem;
+    white-space: pre;
     font-weight: 500;
 }
 

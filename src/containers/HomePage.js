@@ -79,7 +79,7 @@ class HomePage extends Component {
                 }}>
                     <div className={"header-container"}>
                         <div style={{flex: 1}}/>
-                        <Link to={'/settings'}>
+                        <Link to={`/settings`}>
                             <FontAwesomeIcon
                                 className={"icon"}
                                 onMouseEnter={this.handleIconMouseEnter}
