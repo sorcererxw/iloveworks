@@ -1,19 +1,22 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import ReactMarkdown from 'react-markdown'
 
 class ShiftTextComponent extends Component {
     static propTypes = {
         fontSize: PropTypes.number,
         fontColor: PropTypes.string,
         textAlign: PropTypes.oneOf(['center', 'left', 'right']),
-        slogan: PropTypes.array
+        slogan: PropTypes.array,
+        interval: PropTypes.number,
     }
 
     static defaultProps = {
         fontSize: 64,
         fontColor: '#000',
         textAlign: 'left',
-        slogan: []
+        slogan: [],
+        interval: 2,
     }
 
     index = 0
@@ -40,7 +43,8 @@ class ShiftTextComponent extends Component {
     }
 
     componentDidMount() {
-        this.timer = setInterval(this.updateIndex, 1000)
+        this.updateIndex()
+        this.timer = setInterval(this.updateIndex, this.props.interval * 1000)
     }
 
     componentWillUnmount() {
@@ -50,14 +54,21 @@ class ShiftTextComponent extends Component {
     }
 
     render() {
-        const split = this.state.displayText.split("|")
+        const split = this.state.displayText ?
+            this.state.displayText.split("|") : []
         const display = []
         let idx = 0
         for (let i = 0; i < split.length; i++) {
-            if (i > 0) {
-                display.push(<br key={idx++}/>)
-            }
-            display.push(<span key={idx++}>{split[i]}</span>)
+            display.push(
+                <ReactMarkdown
+                    key={idx++}
+                    renderers={{'paragraph': 'span'}}
+                    allowedTypes={[
+                        'root', 'paragraph', 'emphasis',
+                        'strong', 'delete', 'link', 'linkReference',
+                    ]}
+                    source={split[i]}/>
+            )
         }
         return <div style={{
             userSelect: 'none',

@@ -24,7 +24,11 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "autosize": "^4.0.2"
+    "autosize": "^4.0.2",
+    "markdown": "^0.5.0",
+    "react-markdown": "^3.3.4",
+    "react-responsive": "^5.0.0",
+    "react-helmet": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -2,7 +2,7 @@ import zhHans from "./zh-Hans"
 import zhHant from "./zh-Hant"
 import enUS from "./en-US"
 
-export function mergeLangugae(...languages) {
+export function mergeLanguage(...languages) {
     const output = {}
     for (let lang of languages) {
         for (let key in lang) {
@@ -30,10 +30,10 @@ export function getLocale(language) {
         case 'zh-MO':
         case 'zh-SG':
         case 'zh-Hant':
-            result = zhHant
+            result = mergeLanguage(zhHans, zhHant)
             break
         default:
             result = enUS
     }
-    return mergeLangugae(enUS, result)
+    return mergeLanguage(enUS, result)
 }

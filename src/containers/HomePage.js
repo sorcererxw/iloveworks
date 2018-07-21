@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {Link} from "react-router-dom"
 import {connect} from "react-redux"
 import getTheme from "../theme"
-import {defineMessages, injectIntl} from "react-intl"
+import {defineMessages, FormattedMessage, injectIntl} from "react-intl"
 
 class HomePage extends Component {
     state = {
@@ -55,6 +55,13 @@ class HomePage extends Component {
             () => this.setState({
                 displayMouse: false
             }), 2000)
+    }
+
+    componentWillUnmount() {
+        if (this.mouseCountdown !== undefined) {
+            window.clearTimeout(this.mouseCountdown)
+            this.mouseCountdown = undefined
+        }
     }
 
     render() {
