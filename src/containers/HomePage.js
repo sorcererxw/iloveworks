@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {Link} from "react-router-dom"
 import {connect} from "react-redux"
 import getTheme from "../theme"
-import {defineMessages, FormattedMessage, injectIntl} from "react-intl"
+import {defineMessages, injectIntl} from "react-intl"
 
 class HomePage extends Component {
     state = {
