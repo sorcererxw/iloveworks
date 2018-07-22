@@ -27,9 +27,9 @@ export default {
     'settings.slogan.syntax': '语法说明',
     'settings.slogan.syntax.summary': '一行语句为一段，使用 | 进行段内分行\n\n'
     + '另外支持使用部分简单的 Markdown 语法：\n\n'
-    + '*\\\\*加粗\\\\** ⇨ **加粗**\n\n'
-    + '\\\\*斜体\\\\* ⇨ *斜体*\n\n'
-    + '~\\\\~删除\\\\~~ ⇨ ~~删除~~',
+    + '`**加粗**` ⇨ **加粗**\n\n'
+    + '`*斜体*` ⇨ *斜体*\n\n'
+    + '`~~删除~~` ⇨ ~~删除~~',
     'settings.slogan.custom': '自定义标语',
     'settings.slogan.interval': '时间间隔',
     'settings.about.release_note': '更新日志',

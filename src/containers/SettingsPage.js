@@ -13,6 +13,7 @@ import ShiftTextComponent from "../components/ShiftTextComponent"
 import PreferenceItem from "../components/PreferenceItem"
 import PreferenceGroup from "../components/PerferenceGroup"
 import {Helmet} from "react-helmet"
+import packageJson from '../../package.json';
 
 class LanguageTab extends Component {
     onSelect = (e) => {
@@ -53,7 +54,7 @@ class AboutTab extends Component {
             {text =>
                 <PreferenceGroup title={text}>
                     <PreferenceItem>
-                        <div><span role={'img'} aria-label={'logo'}>💼</span> Version 1.0</div>
+                        <div><span role={'img'} aria-label={'logo'}>💼</span> Version {packageJson.version}</div>
                     </PreferenceItem>
                     <PreferenceItem>
                         <div>
@@ -97,17 +98,29 @@ class AppearanceTab extends Component {
     }
 
     render() {
-        const {theme} = this.props
+        const {theme,updateTheme} = this.props
+        if (theme === undefined) {
+            updateTheme('light')
+        }
         const scheme = getTheme(theme)
         const ThemeBlock = ({titleId, value}) => {
             return (
-                <div className={'theme-block'}
-                     onClick={() => this.onThemeSelect(value)}
-                     style={{
-                         borderColor: hexToRgbA(scheme.textSecondary, 0.2),
-                         color: getTheme(value).textPrimary,
-                         backgroundColor: getTheme(value).background,
-                     }}>
+                <div
+                    onClick={() => this.onThemeSelect(value)}
+                    style={{
+                        margin: 8,
+                        display: 'inline-block',
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderRadius: 8,
+                        padding: 16,
+                        paddingBottom: 14,
+                        userSelect: 'none',
+                        fontSize: '1rem',
+                        borderColor: hexToRgbA(scheme.textSecondary, 0.2),
+                        color: getTheme(value).textPrimary,
+                        backgroundColor: getTheme(value).background,
+                    }}>
                     <FormattedMessage id={titleId}/>
                     <div style={{
                         height: 2,
@@ -127,7 +140,7 @@ class AppearanceTab extends Component {
                     {text =>
                         <PreferenceGroup title={text}>
                             <PreferenceItem>
-                                <div className={'theme-block-group'}>
+                                <div style={{width: '100%'}}>
                                     <ThemeBlock
                                         value={'white'}
                                         titleId={'settings.appearance.theme.white'}/>
@@ -377,11 +390,45 @@ class SloganTab extends Component {
 }
 
 class ApplicationTab extends Component {
+    state = {
+        deferredPrompt: undefined
+    }
+
+    constructor(props) {
+        super(props)
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault()
+            // Stash the event so it can be triggered later.
+            this.setState({
+                deferredPrompt: e
+            })
+        })
+    }
+
+    onAddPwa = () => {
+        this.setState.deferredPrompt.prompt()
+        // Wait for the user to respond to the prompt
+        this.setState.deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the A2HS prompt')
+            } else {
+                console.log('User dismissed the A2HS prompt')
+            }
+        })
+    }
+
     render() {
         return (
             <FormattedMessage id="settings.application">
                 {(title) => (
                     <PreferenceGroup title={title}>
+                        <PreferenceItem
+                            title={'PWA'}
+                            actionView={
+                                <button onClick={this.onAddPwa}>添加</button>
+                            }>
+                        </PreferenceItem>
                         <PreferenceItem>
                             <div style={{display: 'flex', flexDirection: 'row'}}>
                                 <div>Chrome 扩展</div>
@@ -460,7 +507,7 @@ class SettingsPage extends Component {
                             <FormattedMessage id="settings.about"/>
                         </NavLink>
                     </nav>
-                    <div className={"form"}>
+                    <div className={"settings-content"}>
                         <Switch>
                             <Route exact path={`${match.url}/slogan`}
                                    component={connect(mapStateToProps, mapDispatchToProps)(injectIntl(SloganTab))}/>

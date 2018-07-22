@@ -93,7 +93,7 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.form {
+.settings-content {
     width: 100%;
     padding: 0 16px 0 32px;
     display: flex;
@@ -102,34 +102,9 @@
 }
 
 @media (max-width: 768px) {
-    .form {
+    .settings-content {
         padding: 0 16px;
     }
-}
-
-.form-item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-}
-
-.form-item-title {
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.theme-block-group {
-    width: 100%;
-}
-
-.theme-block {
-    display: inline-block;
-    margin: 8px;
-    border: 1px solid;
-    border-radius: 8px;
-    padding: 16px 16px 14px;
-    user-select: none;
-    font-size: 1rem;
 }
 
 .setting-input {

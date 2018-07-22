@@ -30,6 +30,11 @@ library.add(faEllipsisV, faCog, faAdjust, faTimes, faBars,
     faAlignLeft, faAlignRight, faAlignCenter)
 
 class App extends Component {
+
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         const {theme} = this.props
         const scheme = getTheme(theme)
@@ -37,7 +42,8 @@ class App extends Component {
             <IntlProvider
                 locale={navigator.language}
                 messages={getLocale(this.props.language)}>
-                <BrowserRouter basename={process.env.PUBLIC_URL}>
+                <BrowserRouter>
+                    {/*<HashRouter>*/}
                     <div>
                         <FormattedMessage id={"appName"}>
                             {appName =>

@@ -1,7 +1,7 @@
 {
   "name": "iloveworks",
-  "homepage": "https://sorcererxw.github.io/iloveworks/",
-  "version": "0.1.0",
+  "homepage": "https://sorcererxw.github.io/",
+  "version": "0.1.1",
   "private": true,
   "devDependencies": {
     "redux-devtools": "^3.4.1",

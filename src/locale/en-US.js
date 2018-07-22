@@ -27,9 +27,9 @@ export default {
     'settings.slogan.syntax': 'Syntax description',
     'settings.slogan.syntax.summary': 'One line statement is a paragraph, use \'|\' to perform line break \n\n'
     + 'Alternative support for using some simple Markdown syntax: \n\n'
-    + '*\\\\*Bold\\\\** ⇨ **Bold**\n\n'
-    + '\\\\*Italic\\\\* ⇨ *Italic*\n\n'
-    + '~\\\\~Delete\\\\~~ ⇨ ~~Delete~~',
+    + '`**Bold**` ⇨ **Bold**\n\n'
+    + '`*Italic*` ⇨ *Italic*\n\n'
+    + '`~~Delete~~` ⇨ ~~Delete~~',
     'settings.slogan.custom': 'Custom slogan',
     'settings.slogan.interval': 'Interval',
     'settings.about.release_note': 'Release Notes',
