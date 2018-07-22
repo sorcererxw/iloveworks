@@ -1,6 +1,7 @@
 {
-  "short_name": "I Love Works",
+  "short_name": "iLoveWorks",
   "name": "I Love Works",
+  "description": "I love work, work make me happy!",
   "icons": [
     {
       "src": "favicon.png",
