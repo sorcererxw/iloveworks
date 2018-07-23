@@ -17,7 +17,9 @@ export function getLocale(language) {
     if (language !== undefined && language != null && language.length > 0) {
         target = language
     } else {
-        target = navigator.language
+        console.log(navigator.userLanguage)
+        console.log(navigator.language)
+        target = navigator.userLanguage || navigator.language
     }
     let result = {}
     switch (target) {

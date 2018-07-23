@@ -1,7 +1,7 @@
 {
   "name": "iloveworks",
   "homepage": "https://sorcererxw.github.io/",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "devDependencies": {
     "redux-devtools": "^3.4.1",
@@ -20,15 +20,12 @@
     "react-redux": "^5.0.7",
     "react-intl-redux": "^2.0.1",
     "react-router-dom": "^4.3.1",
-    "react-router-transition": "^1.2.1",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "autosize": "^4.0.2",
-    "markdown": "^0.5.0",
     "react-markdown": "^3.3.4",
-    "react-responsive": "^5.0.0",
     "react-helmet": "^5.2.0"
   },
   "scripts": {

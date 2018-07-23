@@ -13,7 +13,7 @@ import ShiftTextComponent from "../components/ShiftTextComponent"
 import PreferenceItem from "../components/PreferenceItem"
 import PreferenceGroup from "../components/PerferenceGroup"
 import {Helmet} from "react-helmet"
-import packageJson from '../../package.json';
+import packageJson from '../../package.json'
 
 class LanguageTab extends Component {
     onSelect = (e) => {
@@ -98,7 +98,7 @@ class AppearanceTab extends Component {
     }
 
     render() {
-        const {theme,updateTheme} = this.props
+        const {theme, updateTheme} = this.props
         if (theme === undefined) {
             updateTheme('light')
         }
@@ -170,6 +170,11 @@ class SloganTab extends Component {
         fontSize: 72,
         interval: 2
     }
+    messages = defineMessages({
+        saveSuccess: {
+            id: 'action.save.success'
+        }
+    })
 
     componentDidMount() {
         this.setSlogan()
@@ -223,7 +228,7 @@ class SloganTab extends Component {
 
     onSave = () => {
         this.props.updateSlogan(this.state.text)
-        alert("saved")
+        alert(this.props.intl.formatMessage(this.messages.saveSuccess))
         this.setSlogan()
     }
 

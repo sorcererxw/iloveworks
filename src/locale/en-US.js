@@ -5,10 +5,10 @@ export default {
     + "**Excellent**| is a habit\n"
     + "**Excellent**| is a gift\n"
     + "**I love working**\n"
-    + "Work makes me happy\n"
+    + "Working makes me happy\n"
     + "I am in the ocean of work\n"
     + "Boss told me to have lunch | I turn a deaf ear\n"
-    + "Colleagues call me to drink water | I am indifferent\n"
+    + "Colleagues call me to drink | I am indifferent\n"
     + "Manager call me to sleep | I refuse strongly",
 
     'action.ok': 'OK',

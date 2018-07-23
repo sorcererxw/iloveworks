@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 
-import {BrowserRouter, HashRouter, Redirect, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 
 import HomePage from "./containers/HomePage"
 import SettingsPage from "./containers/SettingsPage"
 
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {
-    faEllipsisV, faCog, faAdjust, faAngleLeft, faTimes, faBars, faAngleDown,
+    faCog, faAdjust, faAngleLeft, faTimes, faBars, faAngleDown,
     faAngleRight, faStopwatch, faAlignLeft,
     faAlignRight, faAlignCenter, faFont,
 } from '@fortawesome/free-solid-svg-icons'
@@ -24,17 +24,12 @@ import getTheme from "./theme"
 
 addLocaleData([...en, ...zh])
 
-library.add(faEllipsisV, faCog, faAdjust, faTimes, faBars,
+library.add(faCog, faAdjust, faTimes, faBars,
     faAngleDown, faAngleRight, faAngleLeft,
     faStopwatch, faFont,
     faAlignLeft, faAlignRight, faAlignCenter)
 
 class App extends Component {
-
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         const {theme} = this.props
         const scheme = getTheme(theme)
@@ -43,7 +38,6 @@ class App extends Component {
                 locale={navigator.language}
                 messages={getLocale(this.props.language)}>
                 <BrowserRouter>
-                    {/*<HashRouter>*/}
                     <div>
                         <FormattedMessage id={"appName"}>
                             {appName =>
