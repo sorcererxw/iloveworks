@@ -1,15 +1,17 @@
 import React, {Component} from 'react'
 import ShiftTextComponent from "../components/ShiftTextComponent"
 import './HomePage.css'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {Link} from "react-router-dom"
 import {connect} from "react-redux"
 import getTheme from "../theme"
 import {defineMessages, injectIntl} from "react-intl"
+import AppHeader from "../components/AppHeader"
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import {MdSettings} from 'react-icons/md'
 
 class HomePage extends Component {
     state = {
-        displayMouse: true
+        idle: false
     }
 
     handleIconMouseEnter = () => {
@@ -42,9 +44,9 @@ class HomePage extends Component {
     mouseCountdown = undefined
 
     handleMouseMove = () => {
-        if (!this.state.displayMouse) {
+        if (this.state.idle) {
             this.setState({
-                displayMouse: true
+                idle: false
             })
         }
         if (this.mouseCountdown !== undefined) {
@@ -53,7 +55,7 @@ class HomePage extends Component {
         }
         this.mouseCountdown = window.setTimeout(
             () => this.setState({
-                displayMouse: false
+                idle: true
             }), 2000)
     }
 
@@ -67,30 +69,43 @@ class HomePage extends Component {
     render() {
         const {theme} = this.props
         const palette = getTheme(theme)
+
+        const settingsIcon = (
+            <Link to={`/settings`}>
+                <h1><MdSettings
+                    style={{
+                        color: palette.textSecondary,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}/></h1>
+            </Link>
+        )
         return (
             <div style={{
                 background: palette.background,
-                cursor: this.state.displayMouse ? 'default' : 'none'
+                cursor: this.state.idle ? 'none' : 'default'
             }}
                  onMouseMove={this.handleMouseMove}
-                 className={"root"}>
-                <header className={"home-header"} style={{
-                    borderColor: palette.textSecondary
+                 className={"home-root"}>
+                <ReactCSSTransitionGroup
+                    transitionLeaveTimeout={500}
+                    transitionEnterTimeout={300}
+                    transitionName="fade">
+                    {this.state.idle ? undefined :
+                        <AppHeader
+                            style={{position: 'absolute', top: 0,}}
+                            rightExtra={settingsIcon}/>
+                    }
+                </ReactCSSTransitionGroup>
+                <main style={{
+                    boxSizing: 'border-box',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}>
-                    <div className={"header-container"}>
-                        <div style={{flex: 1}}/>
-                        <Link to={`/settings`}>
-                            <FontAwesomeIcon
-                                className={"icon"}
-                                onMouseEnter={this.handleIconMouseEnter}
-                                onMouseLeave={this.handleIconMouseLeave}
-                                color={palette.textSecondary}
-                                size={'2x'}
-                                icon={"cog"}/>
-                        </Link>
-                    </div>
-                </header>
-                <main className={"home-main"}>
                     <ShiftTextComponent
                         textAlign={'center'}
                         fontColor={palette.textPrimary}

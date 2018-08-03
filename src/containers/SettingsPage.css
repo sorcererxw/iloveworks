@@ -1,41 +1,11 @@
 .setting-root {
     min-height: 100vh;
     box-sizing: border-box;
-    padding: 16px 16px 32px 32px;
 }
 
 @media (max-width: 768px) {
     .setting-root {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-}
 
-.setting-header {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    flex-direction: row;
-    padding: 16px;
-    border: 0 solid;
-    border-bottom-width: 1px;
-    margin-bottom: 16px;
-}
-
-.setting-header-title {
-    font-weight: bold;
-    font-size: 2rem;
-}
-
-.setting-main {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-}
-
-@media (max-width: 768px) {
-    .setting-main {
-        flex-direction: column;
     }
 }
 
@@ -91,14 +61,6 @@
 .setting-nav > .selected {
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.1);
-}
-
-.settings-content {
-    width: 100%;
-    padding: 0 16px 0 32px;
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
 }
 
 @media (max-width: 768px) {

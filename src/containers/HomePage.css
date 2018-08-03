@@ -1,35 +1,31 @@
-.root {
+.home-root {
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.home-header {
-    position: absolute;
-    width: 100%;
-    top: 0;
+@media (max-width: 768px) {
+    .home-root {
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
-.header-container {
-    width: 100%;
-    display: flex;
-    box-sizing: border-box;
-    padding: 16px;
+.fade-enter {
+    opacity: 0;
 }
 
-.icon {
-    cursor: pointer;
-    height: 24px;
-    width: 24px;
-    margin: 8px;
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
 }
 
-.home-main {
-    padding: 8px;
-    box-sizing: border-box;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.fade-leave {
+    opacity: 1;
 }
 
+.fade-leave.fade-leave-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+}

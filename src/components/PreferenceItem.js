@@ -1,22 +1,15 @@
 import React, {Component} from 'react'
 import getTheme from "../theme"
 import {hexToRgbA} from "../utils/colorUtil"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es"
 import {FormattedMessage} from "react-intl"
 
 export default class PreferenceItem extends Component {
     render() {
-        const {title, titleId, iconName, actionView} = this.props
+        const {title, titleId, actionView} = this.props
         let itemView = <div style={{
             display: 'flex'
         }}>
             <div style={{flex: 1}}>
-                {
-                    iconName ?
-                        <FontAwesomeIcon style={{
-                            marginRight: 16
-                        }} icon={iconName}/> : undefined
-                }
                 {
                     titleId ?
                         <FormattedMessage id={titleId}/> :

@@ -17,12 +17,8 @@ const persistConfig = {
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-const defaultState = {
-    settings:[{
-        theme:'dark'
-    }]
-}
+const defaultState = {}
 
-export default function configureStore(initialState) {
+export default function configureStore() {
     return createStoreWithMiddleware(persistedReducer, defaultState, enhancer)
 }
