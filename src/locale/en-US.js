@@ -26,7 +26,7 @@ export default {
     'settings.slogan': 'Slogan',
     'settings.slogan.syntax': 'Syntax description',
     'settings.slogan.syntax.summary': 'One line statement is a paragraph, use \'|\' to perform line break \n\n'
-        + 'Alternative support for using some simple Markdown syntax: \n\n'
+        + 'And you can use some basic Markdown inline syntax: \n\n'
         + '`**Bold**` ⇨ **Bold**\n\n'
         + '`*Italic*` ⇨ *Italic*\n\n'
         + '`~~Delete~~` ⇨ ~~Delete~~',
