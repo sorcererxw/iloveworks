@@ -1,5 +1,20 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  box-sizing: border-box;
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 48px 16px;
+`
+
+const Title = styled.h1`
+  padding: 0;
+  margin: 0;
+`
 
 export default class AppHeader extends Component {
     static propTypes = {
@@ -14,27 +29,14 @@ export default class AppHeader extends Component {
                 width: '100%',
                 ...this.props.style
             }}>
-                <div style={{
-                    boxSizing: 'border-box',
-                    height: 64,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingTop: 48,
-                    paddingBottom: 48,
-                    paddingLeft: 16,
-                    paddingRight: 16,
-                }}>
+                <Container>
                     {
                         leftExtra === undefined ? undefined :
                             <div style={{marginRight: 16,}}>
                                 {leftExtra}
                             </div>
                     }
-                    <h1 style={{
-                        padding: 0,
-                        margin: 0,
-                    }}>{title}</h1>
+                    <Title>{title}</Title>
                     <div style={{flex: 1}}/>
                     {
                         rightExtra === undefined ? undefined :
@@ -42,7 +44,7 @@ export default class AppHeader extends Component {
                                 {rightExtra}
                             </div>
                     }
-                </div>
+                </Container>
             </header>
         )
     }

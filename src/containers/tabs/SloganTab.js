@@ -8,6 +8,8 @@ import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md"
 import ReactMarkdown from "react-markdown"
 import ShiftTextComponent from "../../components/ShiftTextComponent"
 import React from "react"
+import styled from 'styled-components'
+
 
 export default class SloganTab extends Component {
     state = {
@@ -106,83 +108,85 @@ export default class SloganTab extends Component {
         // 渲染好界面后更新输入框大小
         window.requestAnimationFrame(() => this.updateTextareaSize())
 
-        const customTab = <PreferenceGroup titleId={"settings.slogan.custom"}>
-            <PreferenceItem>
-                <div>
-                    <textarea
-                        onChange={this.onTextChange}
-                        value={this.state.text}
-                        ref={"textarea"}
-                        onKeyUp={this.updateTextareaSize}
-                        className={'slogan-textarea'}
-                        spellCheck="false"
-                        style={{
-                            backgroundColor: scheme.primary,
-                            color: scheme.textPrimary
-                        }}/>
-                    <div style={{
-                        paddingRight: 16,
-                        paddingLeft: 16,
-                        userSelect: 'none',
-                        color: scheme.textSecondary,
-                        fontSize: '0.8rem'
-                    }}>
-                        <div onClick={() => this.setState({showSyntax: !this.state.showSyntax})}
-                             style={{
-                                 display: 'flex',
-                                 alignItems: 'center'
-                             }}>
-                            <FormattedMessage id={'settings.slogan.syntax'}/>
-                            {
-                                this.state.showSyntax ?
-                                    <MdArrowDropUp style={{
-                                        verticalAlign: 'middle',
-                                        marginLeft: 4,
-                                        fontSize: '1rem'
-                                    }}/>
-                                    : <MdArrowDropDown style={{
-                                        verticalAlign: 'middle',
-                                        marginLeft: 4,
-                                        fontSize: '1rem'
-                                    }}/>
+        const customTab = (
+            <PreferenceGroup titleId={"settings.slogan.custom"}>
+                <PreferenceItem>
+                    <div>
+                        <textarea
+                            onChange={this.onTextChange}
+                            value={this.state.text}
+                            ref={"textarea"}
+                            onKeyUp={this.updateTextareaSize}
+                            className={'slogan-textarea'}
+                            spellCheck="false"
+                            style={{
+                                backgroundColor: scheme.primary,
+                                color: scheme.textPrimary
+                            }}/>
+                        <div style={{
+                            paddingRight: 16,
+                            paddingLeft: 16,
+                            userSelect: 'none',
+                            color: scheme.textSecondary,
+                            fontSize: '0.8rem'
+                        }}>
+                            <div onClick={() => this.setState({showSyntax: !this.state.showSyntax})}
+                                 style={{
+                                     display: 'flex',
+                                     alignItems: 'center'
+                                 }}>
+                                <FormattedMessage id={'settings.slogan.syntax'}/>
+                                {
+                                    this.state.showSyntax ?
+                                        <MdArrowDropUp style={{
+                                            verticalAlign: 'middle',
+                                            marginLeft: 4,
+                                            fontSize: '1rem'
+                                        }}/>
+                                        : <MdArrowDropDown style={{
+                                            verticalAlign: 'middle',
+                                            marginLeft: 4,
+                                            fontSize: '1rem'
+                                        }}/>
+                                }
+                            </div>
+                            {this.state.showSyntax ?
+                                <div>
+                                    <FormattedMessage id={'settings.slogan.syntax.summary'}>
+                                        {(text) => <ReactMarkdown
+                                            renderers={{'paragraph': 'div'}}
+                                            source={text}/>}
+                                    </FormattedMessage>
+                                </div> : undefined
                             }
                         </div>
-                        {this.state.showSyntax ?
-                            <div>
-                                <FormattedMessage id={'settings.slogan.syntax.summary'}>
-                                    {(text) => <ReactMarkdown
-                                        renderers={{'paragraph': 'div'}}
-                                        source={text}/>}
-                                </FormattedMessage>
-                            </div> : undefined
-                        }
                     </div>
-                </div>
-                <div style={{
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'row',
-                }}>
-                    <div style={{flex: 1}}/>
-                    <div className={"button-bar"}>
-                        <button onClick={this.onReset}
-                                style={{
-                                    backgroundColor: scheme.primary,
-                                    color: scheme.textPrimary
-                                }}>
-                            <FormattedMessage id={'action.reset'}/>
-                        </button>
-                        <button onClick={this.onSave}
-                                style={{
-                                    backgroundColor: scheme.primary,
-                                    color: scheme.textPrimary
-                                }}>
-                            <FormattedMessage id={'action.save'}/>
-                        </button>
+                    <div style={{
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'row',
+                    }}>
+                        <div style={{flex: 1}}/>
+                        <div className={"button-bar"}>
+                            <button onClick={this.onReset}
+                                    style={{
+                                        backgroundColor: scheme.primary,
+                                        color: scheme.textPrimary
+                                    }}>
+                                <FormattedMessage id={'action.reset'}/>
+                            </button>
+                            <button onClick={this.onSave}
+                                    style={{
+                                        backgroundColor: scheme.primary,
+                                        color: scheme.textPrimary
+                                    }}>
+                                <FormattedMessage id={'action.save'}/>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </PreferenceItem>
-        </PreferenceGroup>
+                </PreferenceItem>
+            </PreferenceGroup>
+        )
         const otherTab = <PreferenceGroup title={"其他设置"}>
             <PreferenceItem
                 title={"时间间隔"}
@@ -245,8 +249,6 @@ export default class SloganTab extends Component {
         return (
             <div>
                 {customTab}
-                {/*{otherTab}*/}
-                {/*{previewTab}*/}
             </div>
         )
     }

@@ -8,16 +8,23 @@ import {defineMessages, injectIntl} from "react-intl"
 import AppHeader from "../components/AppHeader"
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import {MdSettings} from 'react-icons/md'
+import styled from 'styled-components'
+
+const Root = styled.div`
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+  @media (max-width: 768px) {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+`
 
 class HomePage extends Component {
     state = {
         idle: false
-    }
-
-    handleIconMouseEnter = () => {
-    }
-
-    handleIconMouseLeave = () => {
     }
 
     getSlogan = () => {
@@ -83,12 +90,11 @@ class HomePage extends Component {
             </Link>
         )
         return (
-            <div style={{
+            <Root style={{
                 background: palette.background,
                 cursor: this.state.idle ? 'none' : 'default'
             }}
-                 onMouseMove={this.handleMouseMove}
-                 className={"home-root"}>
+                  onMouseMove={this.handleMouseMove}>
                 <ReactCSSTransitionGroup
                     transitionLeaveTimeout={500}
                     transitionEnterTimeout={300}
@@ -113,7 +119,7 @@ class HomePage extends Component {
                         slogan={this.getSlogan()}
                     />
                 </main>
-            </div>
+            </Root>
         )
     }
 }

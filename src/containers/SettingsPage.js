@@ -15,10 +15,72 @@ import SloganTab from "./tabs/SloganTab"
 import AppearanceTab from "./tabs/AppearanceTab"
 import ApplicationTab from "./tabs/ApplicationTab"
 import AboutTab from "./tabs/AboutTab"
+import styled from 'styled-components'
 
 const Mobile = props => <Responsive {...props} maxWidth={425}/>
 const Tablet = props => <Responsive {...props} minWidth={426} maxWidth={768}/>
 const Default = props => <Responsive {...props} minWidth={769}/>
+
+const Root = styled.div`
+  min-height: 100vh;
+  box-sizing: border-box;
+`
+
+const Sider = styled.div`
+  padding: 16px;
+  border: 0 solid;
+  border-right-width: 1px;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  .selected {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    box-sizing: border-box;
+    border-right-width: 0;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    overflow: auto;
+
+    ::-webkit-scrollbar {
+        width: 0 !important;
+    }
+  }
+`
+
+const NavItem = styled.div`
+  text-decoration: none;
+  padding: 8px 32px 8px 16px;
+  margin-bottom: 16px;
+  margin-right: 8px;
+  font-size: 1rem;
+  white-space: pre;
+  font-weight: 500;
+  
+  :hover {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 8px 16px 8px 16px;
+    margin-right: 8px;
+  }
+`
+
+const ContentContainer = styled.div`
+  width: 100%;
+  padding: 0 16px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+`
 
 class SettingsPage extends Component {
     state = {
@@ -40,13 +102,7 @@ class SettingsPage extends Component {
         )
 
         const content = (
-            <div style={{
-                width: '100%',
-                padding: '0 16px 0 16px',
-                display: 'flex',
-                boxSizing: 'border-box',
-                flexDirection: 'column'
-            }}>
+            <ContentContainer>
                 <Switch>
                     <Route exact path={`${match.url}/slogan`}
                            component={connect(mapStateToProps, mapDispatchToProps)(injectIntl(SloganTab))}/>
@@ -60,7 +116,7 @@ class SettingsPage extends Component {
                            component={connect(mapStateToProps, mapDispatchToProps)(AboutTab)}/>
                     <Route render={() => <Redirect to={`${match.url}/appearance`}/>}/>
                 </Switch>
-            </div>
+            </ContentContainer>
         )
 
         const links = ['appearance', 'slogan', 'language', 'about']
@@ -86,10 +142,10 @@ class SettingsPage extends Component {
         )
 
         return (
-            <div style={{
+            <Root style={{
                 backgroundColor: palette.background,
                 color: palette.textPrimary
-            }} className={"setting-root"}>
+            }}>
                 {meta}
                 <FormattedMessage id="settings">
                     {title => [
@@ -104,10 +160,10 @@ class SettingsPage extends Component {
                         display: 'flex',
                         flexDirection: 'row'
                     }}>
-                        <nav className={"setting-nav"}
-                             style={{
-                                 borderColor: hexToRgbA(palette.textSecondary, 0.2),
-                             }}>
+                        <Sider
+                            style={{
+                                borderColor: hexToRgbA(palette.textSecondary, 0.2),
+                            }}>
                             {
                                 links.map((link, key) => (
                                     <NavLink
@@ -116,11 +172,13 @@ class SettingsPage extends Component {
                                         activeStyle={{color: palette.textPrimary}}
                                         style={{color: palette.textSecondary}}
                                         to={`${match.url}/${link}`}>
-                                        <FormattedMessage id={`settings.${link}`}/>
+                                        <NavItem>
+                                            <FormattedMessage id={`settings.${link}`}/>
+                                        </NavItem>
                                     </NavLink>
                                 ))
                             }
-                        </nav>
+                        </Sider>
                         {content}
                     </main>
                 </Default>
@@ -130,10 +188,10 @@ class SettingsPage extends Component {
                         display: 'flex',
                         flexDirection: 'column'
                     }}>
-                        <nav className={"setting-nav"}
-                             style={{
-                                 borderColor: hexToRgbA(palette.textSecondary, 0.2),
-                             }}>
+                        <Sider
+                            style={{
+                                borderColor: hexToRgbA(palette.textSecondary, 0.2),
+                            }}>
                             {
                                 links.map((link, key) => (
                                     <NavLink
@@ -142,11 +200,13 @@ class SettingsPage extends Component {
                                         activeStyle={{color: palette.textPrimary}}
                                         style={{color: palette.textSecondary}}
                                         to={`${match.url}/${link}`}>
-                                        <FormattedMessage id={`settings.${link}`}/>
+                                        <NavItem>
+                                            <FormattedMessage id={`settings.${link}`}/>
+                                        </NavItem>
                                     </NavLink>
                                 ))
                             }
-                        </nav>
+                        </Sider>
                         {content}
                     </main>
                 </Tablet>
@@ -158,13 +218,13 @@ class SettingsPage extends Component {
                     }}>
                         {
                             this.state.showMenu ?
-                                <nav className={"setting-nav"}
-                                     style={{
-                                         borderColor: hexToRgbA(palette.textSecondary, 0.2),
-                                         width: '100%',
-                                         display: 'flex',
-                                         flexDirection: 'column'
-                                     }}>
+                                <Sider
+                                    style={{
+                                        borderColor: hexToRgbA(palette.textSecondary, 0.2),
+                                        width: '100%',
+                                        display: 'flex',
+                                        flexDirection: 'column'
+                                    }}>
                                     {
                                         links.map((link, key) => (
                                             <NavLink
@@ -173,16 +233,18 @@ class SettingsPage extends Component {
                                                 activeStyle={{color: palette.textPrimary}}
                                                 style={{color: palette.textSecondary}}
                                                 to={`${match.url}/${link}`}>
-                                                <FormattedMessage id={`settings.${link}`}/>
+                                                <NavItem>
+                                                    <FormattedMessage id={`settings.${link}`}/>
+                                                </NavItem>
                                             </NavLink>
                                         ))
                                     }
-                                </nav> : undefined
+                                </Sider> : undefined
                         }
                         {content}
                     </main>
                 </Mobile>
-            </div>
+            </Root>
         )
     }
 }

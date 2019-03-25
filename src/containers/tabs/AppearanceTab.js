@@ -5,6 +5,25 @@ import {FormattedMessage} from "react-intl"
 import PreferenceGroup from "../../components/PerferenceGroup"
 import PreferenceItem from "../../components/PreferenceItem"
 import React from "react"
+import styled from 'styled-components'
+
+const ThemeBlockContainer = styled.div`
+  margin: 8px;
+  display: inline-block;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 16px 16px 14px;
+  user-select: none;
+  cursor: pointer;
+  font-size: 1rem;
+`
+
+const ThemeBlockSelection = styled.div`
+  height: 2px;
+  margin-top: 2px;
+  border-width: 0;
+  border-radius: 2px;
+`
 
 export default class AppearanceTab extends Component {
 
@@ -20,32 +39,18 @@ export default class AppearanceTab extends Component {
         const scheme = getTheme(theme)
         const ThemeBlock = ({titleId, value}) => {
             return (
-                <div
+                <ThemeBlockContainer
                     onClick={() => this.onThemeSelect(value)}
                     style={{
-                        margin: 8,
-                        display: 'inline-block',
-                        borderWidth: 1,
-                        borderStyle: 'solid',
-                        borderRadius: 8,
-                        padding: 16,
-                        paddingBottom: 14,
-                        userSelect: 'none',
-                        fontSize: '1rem',
                         borderColor: hexToRgbA(scheme.textSecondary, 0.2),
                         color: getTheme(value).textPrimary,
                         backgroundColor: getTheme(value).background,
                     }}>
                     <FormattedMessage id={titleId}/>
-                    <div style={{
-                        height: 2,
-                        marginTop: 2,
-                        borderWidth: 0,
-                        borderRadius: 2,
-                        backgroundColor: value === theme ?
-                            scheme.accent : 'transparent'
+                    <ThemeBlockSelection style={{
+                        backgroundColor: value === theme ? scheme.accent : 'transparent'
                     }}/>
-                </div>
+                </ThemeBlockContainer>
             )
         }
 
