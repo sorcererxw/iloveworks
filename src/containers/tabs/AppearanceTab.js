@@ -73,6 +73,9 @@ export default class AppearanceTab extends Component {
                   <ThemeBlock
                     value={'black'}
                     titleId={'settings.appearance.theme.black'}/>
+                  <ThemeBlock
+                    value={'chrome-dark'}
+                    titleId={'settings.appearance.theme.chrome-dark'}/>
                 </div>
               </PreferenceItem>
             </PreferenceGroup>

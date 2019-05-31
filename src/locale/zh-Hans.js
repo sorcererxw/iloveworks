@@ -38,4 +38,5 @@ export default {
   'settings.appearance.theme.black': '黑 色',
   'settings.appearance.theme.light': '亮 色',
   'settings.appearance.theme.dark': '暗 色',
+  'settings.appearance.theme.chrome-dark': 'Chrome(暗)',
 }

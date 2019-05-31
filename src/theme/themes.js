@@ -34,11 +34,11 @@ export const Black = {
   textSecondary: '#a0a0a1',
 }
 
-// export const ChromeDark = {
-//   primary: '#333639',
-//   primaryDark: '#292c2f',
-//   background: '#202124',
-//   accent: '#fff',
-//   textPrimary: '#f1f3f4',
-//   textSecondary: '#9ba0a5',
-// }
+export const ChromeDark = {
+  primary: '#333639',
+  primaryDark: '#292c2f',
+  background: '#202124',
+  accent: '#fff',
+  textPrimary: '#f1f3f4',
+  textSecondary: '#9ba0a5',
+}

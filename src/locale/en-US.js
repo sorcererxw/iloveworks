@@ -38,4 +38,5 @@ export default {
   'settings.appearance.theme.black': 'Black',
   'settings.appearance.theme.light': 'Light',
   'settings.appearance.theme.dark': 'Dark',
+  'settings.appearance.theme.chrome-dark': 'Chrome Dark',
 }

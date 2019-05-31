@@ -11,8 +11,8 @@ export default function getTheme(theme) {
       return White
     case 'black':
       return Black
-    // case 'chrome-dark':
-    //   return ChromeDark
+    case 'chrome-dark':
+      return ChromeDark
     default:
       return Light
   }
