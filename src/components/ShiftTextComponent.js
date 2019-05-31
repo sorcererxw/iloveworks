@@ -66,6 +66,7 @@ class ShiftTextComponent extends Component {
                     allowedTypes={[
                         'root', 'paragraph', 'emphasis',
                         'strong', 'delete', 'link', 'linkReference',
+                        'text'
                     ]}
                     source={split[i]}/>
             )

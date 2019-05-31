@@ -3,31 +3,31 @@
   "homepage": "https://sorcererxw.github.io/",
   "version": "0.1.3",
   "private": true,
-  "devDependencies": {
-    "redux-devtools": "^3.4.1",
-    "gh-pages": "^1.2.0"
-  },
   "dependencies": {
     "autosize": "^4.0.2",
-    "fbjs": "^0.8.17",
+    "fbjs": "^1.0.0",
     "intl": "^1.2.5",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-addons-css-transition-group": "^15.6.2",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.0.4",
     "react-intl": "^2.4.0",
     "react-intl-redux": "^2.0.1",
-    "react-markdown": "^3.3.4",
-    "react-redux": "^5.0.7",
-    "react-responsive": "^5.0.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
+    "react-markdown": "^4.0.8",
+    "react-redux": "^7.0.3",
+    "react-responsive": "^6.1.2",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.1",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
-    "styled-components": "^3.4.2"
+    "styled-components": "^4.2.1"
+  },
+  "devDependencies": {
+    "redux-devtools": "^3.4.1",
+    "gh-pages": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,5 +36,17 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
