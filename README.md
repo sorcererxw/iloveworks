@@ -14,4 +14,4 @@
 2. `yarn install`
 3. change the `CNAME`(/public/CNAME) file to your domain
 4. change the `homepage` config in `package.json` to your github homepage (example.github.io)
-5. `yarn deploy`
+5. `yarn run deploy`
