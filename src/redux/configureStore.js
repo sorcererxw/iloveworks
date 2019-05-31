@@ -9,16 +9,16 @@ const middlewares = [logger]
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
 
 const enhancer = window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__({actionCreators})
+  window.__REDUX_DEVTOOLS_EXTENSION__({actionCreators})
 
 const persistConfig = {
-    key: 'root',
-    storage
+  key: 'root',
+  storage
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const defaultState = {}
 
 export default function configureStore() {
-    return createStoreWithMiddleware(persistedReducer, defaultState, enhancer)
+  return createStoreWithMiddleware(persistedReducer, defaultState, enhancer)
 }

@@ -3,39 +3,39 @@ import zhHant from "./zh-Hant"
 import enUS from "./en-US"
 
 export function mergeLanguage(...languages) {
-    const output = {}
-    for (let lang of languages) {
-        for (let key in lang) {
-            output[key + ''] = lang[key + '']
-        }
+  const output = {}
+  for (let lang of languages) {
+    for (let key in lang) {
+      output[key + ''] = lang[key + '']
     }
-    return output
+  }
+  return output
 }
 
 export function getLocale(language) {
-    let target = undefined
-    if (language !== undefined && language != null && language.length > 0) {
-        target = language
-    } else {
-        console.log(navigator.userLanguage)
-        console.log(navigator.language)
-        target = navigator.userLanguage || navigator.language
-    }
-    let result = {}
-    switch (target) {
-        case 'zh-Hans':
-        case 'zh-CN':
-            result = zhHans
-            break
-        case 'zh-HK':
-        case 'zh-TW':
-        case 'zh-MO':
-        case 'zh-SG':
-        case 'zh-Hant':
-            result = mergeLanguage(zhHans, zhHant)
-            break
-        default:
-            result = enUS
-    }
-    return mergeLanguage(enUS, result)
+  let target = undefined
+  if (language !== undefined && language != null && language.length > 0) {
+    target = language
+  } else {
+    console.log(navigator.userLanguage)
+    console.log(navigator.language)
+    target = navigator.userLanguage || navigator.language
+  }
+  let result = {}
+  switch (target) {
+    case 'zh-Hans':
+    case 'zh-CN':
+      result = zhHans
+      break
+    case 'zh-HK':
+    case 'zh-TW':
+    case 'zh-MO':
+    case 'zh-SG':
+    case 'zh-Hant':
+      result = mergeLanguage(zhHans, zhHant)
+      break
+    default:
+      result = enUS
+  }
+  return mergeLanguage(enUS, result)
 }

@@ -11,11 +11,11 @@ import {persistStore} from "redux-persist"
 const store = configureStore()
 
 ReactDOM.render(
-    <Provider store={store}>
-        <PersistGate persistor={persistStore(store)}>
-            <App/>
-        </PersistGate>
-    </Provider>,
-    document.getElementById('root'))
+  <Provider store={store}>
+    <PersistGate persistor={persistStore(store)}>
+      <App/>
+    </PersistGate>
+  </Provider>,
+  document.getElementById('root'))
 
 registerServiceWorker()

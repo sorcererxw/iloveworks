@@ -20,47 +20,47 @@ import getTheme from "./theme"
 addLocaleData([...en, ...zh])
 
 class App extends Component {
-    render() {
-        const meta = (
-            <FormattedMessage id={"appName"}>
-                {appName =>
-                    <Helmet>
-                        <meta charSet="utf-8"/>
-                        <title>{appName}</title>
-                        <meta name="theme-color" content={scheme.background}/>
-                    </Helmet>
-                }
-            </FormattedMessage>
-        )
+  render() {
+    const meta = (
+      <FormattedMessage id={"appName"}>
+        {appName =>
+          <Helmet>
+            <meta charSet="utf-8"/>
+            <title>{appName}</title>
+            <meta name="theme-color" content={scheme.background}/>
+          </Helmet>
+        }
+      </FormattedMessage>
+    )
 
-        const route = (
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path={`/`} component={HomePage}/>
-                    <Route path={`/settings`} component={SettingsPage}/>
-                    <Route render={() => <Redirect to={`/`}/>}/>
-                </Switch>
-            </BrowserRouter>
-        )
+    const route = (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path={`/`} component={HomePage}/>
+          <Route path={`/settings`} component={SettingsPage}/>
+          <Route render={() => <Redirect to={`/`}/>}/>
+        </Switch>
+      </BrowserRouter>
+    )
 
-        const {theme} = this.props
-        const scheme = getTheme(theme)
-        return (
-            <IntlProvider locale={navigator.language} messages={getLocale(this.props.language)}>
-                <div>
-                    {meta}
-                    {route}
-                </div>
-            </IntlProvider>
-        )
-    }
+    const {theme} = this.props
+    const scheme = getTheme(theme)
+    return (
+      <IntlProvider locale={navigator.language} messages={getLocale(this.props.language)}>
+        <div>
+          {meta}
+          {route}
+        </div>
+      </IntlProvider>
+    )
+  }
 }
 
 const mapStateToProps = state => {
-    return {
-        language: state.settings.language,
-        theme: state.settings.theme
-    }
+  return {
+    language: state.settings.language,
+    theme: state.settings.theme
+  }
 }
 
 export default connect(mapStateToProps, null)(App)

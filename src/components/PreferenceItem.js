@@ -12,30 +12,30 @@ const Container = styled.div`
 `
 
 export default class PreferenceItem extends Component {
-    render() {
-        const {title, titleId, actionView} = this.props
-        let itemView = (
-            <div style={{display: 'flex'}}>
-                <div style={{flex: 1}}>
-                    {
-                        titleId ?
-                            <FormattedMessage id={titleId}/> :
-                            <span>{title}</span>
-                    }
-                </div>
-                <div style={{flex: 2}}>
-                    <div>{actionView}</div>
-                </div>
-            </div>
-        )
+  render() {
+    const {title, titleId, actionView} = this.props
+    let itemView = (
+      <div style={{display: 'flex'}}>
+        <div style={{flex: 1}}>
+          {
+            titleId ?
+              <FormattedMessage id={titleId}/> :
+              <span>{title}</span>
+          }
+        </div>
+        <div style={{flex: 2}}>
+          <div>{actionView}</div>
+        </div>
+      </div>
+    )
 
-        return (
-            <Container style={{
-                borderColor: hexToRgbA(getTheme(this.props.theme).textSecondary, 0.2)
-            }}>
-                {itemView}
-                {this.props.children}
-            </Container>
-        )
-    }
+    return (
+      <Container style={{
+        borderColor: hexToRgbA(getTheme(this.props.theme).textSecondary, 0.2)
+      }}>
+        {itemView}
+        {this.props.children}
+      </Container>
+    )
+  }
 }

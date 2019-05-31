@@ -9,28 +9,28 @@ const Title = styled.div`
 `
 
 export default class PreferenceGroup extends Component {
-    render() {
-        const {title, titleId, children} = this.props
+  render() {
+    const {title, titleId, children} = this.props
 
-        if (titleId !== undefined) {
-            return (
-                <div>
-                    <FormattedMessage id={titleId}>
-                        {text => <Title>{text}</Title>}
-                    </FormattedMessage>
-                    <div>
-                        {children}
-                    </div>
-                </div>
-            )
-        }
-        return (
-            <div>
-                <Title>{title}</Title>
-                <div>
-                    {children}
-                </div>
-            </div>
-        )
+    if (titleId !== undefined) {
+      return (
+        <div>
+          <FormattedMessage id={titleId}>
+            {text => <Title>{text}</Title>}
+          </FormattedMessage>
+          <div>
+            {children}
+          </div>
+        </div>
+      )
     }
+    return (
+      <div>
+        <Title>{title}</Title>
+        <div>
+          {children}
+        </div>
+      </div>
+    )
+  }
 }
