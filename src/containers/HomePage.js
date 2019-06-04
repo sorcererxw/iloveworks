@@ -90,11 +90,12 @@ class HomePage extends Component {
       </Link>
     )
     return (
-      <Root style={{
-        background: palette.background,
-        cursor: this.state.idle ? 'none' : 'default'
-      }}
-            onMouseMove={this.handleMouseMove}>
+      <Root
+        style={{
+          background: palette.background,
+          cursor: this.state.idle ? 'none' : 'default'
+        }}
+        onMouseMove={this.handleMouseMove}>
         <ReactCSSTransitionGroup
           transitionLeaveTimeout={500}
           transitionEnterTimeout={300}
