@@ -12,7 +12,6 @@ import {getLocale} from './locale'
 import {addLocaleData, FormattedMessage, IntlProvider} from "react-intl"
 import zh from 'react-intl/locale-data/zh'
 import en from 'react-intl/locale-data/en'
-
 import {Helmet} from "react-helmet"
 
 import getTheme from "./theme"
@@ -21,6 +20,9 @@ addLocaleData([...en, ...zh])
 
 class App extends Component {
   render() {
+    const theme = this.props.theme
+    const scheme = getTheme(theme)
+
     const meta = (
       <FormattedMessage id={"appName"}>
         {appName =>
@@ -43,8 +45,6 @@ class App extends Component {
       </BrowserRouter>
     )
 
-    const {theme} = this.props
-    const scheme = getTheme(theme)
     return (
       <IntlProvider locale={navigator.language} messages={getLocale(this.props.language)}>
         <div>

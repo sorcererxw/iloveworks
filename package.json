@@ -8,6 +8,7 @@
     "fbjs": "^1.0.0",
     "intl": "^1.2.5",
     "prop-types": "^15.6.2",
+    "query-string": "^6.5.0",
     "react": "^16.4.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.4.2",
@@ -26,8 +27,8 @@
     "styled-components": "^4.2.1"
   },
   "devDependencies": {
-    "redux-devtools": "^3.4.1",
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "redux-devtools": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

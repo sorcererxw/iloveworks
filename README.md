@@ -2,13 +2,22 @@
 
 [visit site](https://ilove.works)
 
-## Run on local
+## Use as ScreenSaver
+
+### MacOS
+
+1. Install [liquidx/webviewscreensaver](https://github.com/liquidx/webviewscreensaver)
+2. Add https://ilove.works to urls
+
+## develop
+
+### Run on local
 1. fork and clone this repository
 2. `yarn install`
 3. `yarn run build`
 4. `yarn run start`
 
-## Deploy on your github pages
+### Deploy on your github pages
 
 1. fork and clone this repository
 2. `yarn install`

@@ -74,7 +74,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const {theme} = this.props
+    const theme = this.props.theme
     const palette = getTheme(theme)
 
     const settingsIcon = (
@@ -124,10 +124,14 @@ class HomePage extends Component {
   }
 }
 
+const getThemeFromUrl = () => {
+  return new URLSearchParams(window.location.search).get('theme')
+}
+
 const mapStateToProps = state => {
   return {
     language: state.settings.language,
-    theme: state.settings.theme,
+    theme: getThemeFromUrl() || state.settings.theme,
     slogan: state.settings.slogan
   }
 }
