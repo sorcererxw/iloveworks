@@ -24,7 +24,7 @@ const Root = styled.div`
 
 class HomePage extends Component {
   state = {
-    idle: false
+    idle: true
   }
 
   getSlogan = () => {
