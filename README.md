@@ -7,7 +7,7 @@
 ### MacOS
 
 1. Install [liquidx/webviewscreensaver](https://github.com/liquidx/webviewscreensaver)
-2. Add https://ilove.works to urls
+2. Add https://ilove.works/?theme=black to urls
 
 ## develop
 
