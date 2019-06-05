@@ -2,12 +2,22 @@
 
 [visit site](https://ilove.works)
 
-## Use as ScreenSaver
+## Usage
 
-### MacOS
+### Url Params
+
+name  |values
+------|--------------------
+lang  |`zh-hant`, `zh-hans`, `en`
+slogan|Any text you want to show, [Reference](https://ilove.works/settings/slogan). In addition, you can use <code>&#124;&#124;</code> as paragraph break.  
+theme |`light`, `dark`, `white`, `black`, `chrome-dark`
+
+### Use as ScreenSaver
+
+#### MacOS
 
 1. Install [liquidx/webviewscreensaver](https://github.com/liquidx/webviewscreensaver)
-2. Add https://ilove.works/?theme=black to urls
+2. Add this site's url (example: https://ilove.works/?theme=black) to urls
 
 ## develop
 

@@ -21,6 +21,7 @@ export function getLocale(language) {
   }
   let result = {}
   switch (target.toLocaleLowerCase()) {
+    case 'zh':
     case 'zh-hans':
     case 'zh-cn':
       result = zhHans
