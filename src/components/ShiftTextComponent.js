@@ -67,10 +67,10 @@ class ShiftTextComponent extends Component {
     const display = []
     let idx = 0
     for (let i = 0; i < split.length; i++) {
-      if (i > 0) display.push(<br/>)
+      if (i > 0) display.push(<br key={idx * 2 + 1}/>)
       display.push(
         <ReactMarkdown
-          key={idx++}
+          key={idx * 2}
           renderers={{'paragraph': 'span'}}
           allowedTypes={[
             'root', 'paragraph', 'emphasis',

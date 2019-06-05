@@ -20,16 +20,16 @@ export function getLocale(language) {
     target = navigator.userLanguage || navigator.language
   }
   let result = {}
-  switch (target) {
-    case 'zh-Hans':
-    case 'zh-CN':
+  switch (target.toLocaleLowerCase()) {
+    case 'zh-hans':
+    case 'zh-cn':
       result = zhHans
       break
-    case 'zh-HK':
-    case 'zh-TW':
-    case 'zh-MO':
-    case 'zh-SG':
-    case 'zh-Hant':
+    case 'zh-hk':
+    case 'zh-tw':
+    case 'zh-mo':
+    case 'zh-sg':
+    case 'zh-hant':
       result = mergeLanguage(zhHans, zhHant)
       break
     default:

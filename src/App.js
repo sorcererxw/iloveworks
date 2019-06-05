@@ -15,6 +15,7 @@ import en from 'react-intl/locale-data/en'
 import {Helmet} from "react-helmet"
 
 import getTheme from "./theme"
+import {getQueryParamsFromUrl} from "./utils/urlUtil";
 
 addLocaleData([...en, ...zh])
 
@@ -58,7 +59,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    language: state.settings.language,
+    language: getQueryParamsFromUrl('lang') || state.settings.language,
     theme: state.settings.theme
   }
 }

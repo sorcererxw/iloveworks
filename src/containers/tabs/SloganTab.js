@@ -8,8 +8,6 @@ import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md"
 import ReactMarkdown from "react-markdown"
 import ShiftTextComponent from "../../components/ShiftTextComponent"
 import React from "react"
-import styled from 'styled-components'
-
 
 export default class SloganTab extends Component {
   state = {

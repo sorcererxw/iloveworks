@@ -9,6 +9,7 @@ import AppHeader from "../components/AppHeader"
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import {MdSettings} from 'react-icons/md'
 import styled from 'styled-components'
+import {getQueryParamsFromUrl} from '../utils/urlUtil'
 
 const Root = styled.div`
   justify-content: center;
@@ -28,10 +29,8 @@ class HomePage extends Component {
   }
 
   getSlogan = () => {
-    let slogan = ''
-    if (this.props.slogan === undefined
-      || this.props.slogan == null
-      || this.props.slogan.trim().length === 0) {
+    let slogan = this.props.slogan
+    if (!this.props.slogan || this.props.slogan.trim().length === 0) {
       const messages = defineMessages({
         defaultSlogan: {
           id: 'slogan.default'
@@ -39,9 +38,8 @@ class HomePage extends Component {
       })
       const {intl} = this.props
       slogan = intl.formatMessage(messages.defaultSlogan)
-    } else {
-      slogan = this.props.slogan
     }
+
     return slogan.split('\n')
       .filter(item => item !== undefined && item != null)
       .map(item => item.trim())
@@ -125,15 +123,16 @@ class HomePage extends Component {
   }
 }
 
-const getThemeFromUrl = () => {
-  return new URLSearchParams(window.location.search).get('theme')
-}
-
 const mapStateToProps = state => {
+  let slogan = getQueryParamsFromUrl('slogan')
+  if (slogan) {
+    slogan = slogan.replace('||', '\n')
+  }
+
   return {
     language: state.settings.language,
-    theme: getThemeFromUrl() || state.settings.theme,
-    slogan: state.settings.slogan
+    theme: getQueryParamsFromUrl('theme') || state.settings.theme,
+    slogan: slogan || state.settings.slogan
   }
 }
 
