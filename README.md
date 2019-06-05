@@ -19,6 +19,8 @@ theme |`light`, `dark`, `white`, `black`, `chrome-dark`
 1. Install [liquidx/webviewscreensaver](https://github.com/liquidx/webviewscreensaver)
 2. Add this site's url (example: https://ilove.works/?theme=black) to urls
 
+![](https://github/sorcererxw/iloveworks/blog/resources/macos-screensaver-guide.png)
+
 ## develop
 
 ### Run on local
