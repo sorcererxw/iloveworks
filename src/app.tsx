@@ -33,9 +33,9 @@ class App extends Component<Props> {
       <FormattedMessage id={'appName'}>
         {appName =>
           <Helmet>
-            <meta charSet="utf-8"/>
+            <meta charSet='utf-8'/>
             <title>{appName}</title>
-            <meta name="theme-color" content={scheme.background}/>
+            <meta name='theme-color' content={scheme.background}/>
           </Helmet>
         }
       </FormattedMessage>
@@ -44,9 +44,9 @@ class App extends Component<Props> {
     const route = (
       <BrowserRouter>
         <Switch>
-          <Route exact path={`/`} component={HomePage}/>
-          <Route path={`/settings`} component={SettingsPage}/>
-          <Route render={() => <Redirect to={`/`}/>}/>
+          <Route exact path={'/'} component={HomePage}/>
+          <Route path={'/settings'} component={SettingsPage}/>
+          <Route render={(() => () => <Redirect to={'/'}/>)()}/>
         </Switch>
       </BrowserRouter>
     )
@@ -65,7 +65,7 @@ class App extends Component<Props> {
 const mapStateToProps = (state: any) => {
   return {
     language: getQueryParamsFromUrl('lang') || state.settings.language,
-    theme: state.settings.theme
+    theme: state.settings.theme,
   }
 }
 

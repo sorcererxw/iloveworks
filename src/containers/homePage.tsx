@@ -1,22 +1,21 @@
 import React, { Component } from 'react'
-import ShiftTextComponent from "../components/shiftTextComponent"
+import ShiftTextComponent from '../components/shiftTextComponent'
 import './homePage.css'
-import { Link } from "react-router-dom"
-import { connect } from "react-redux"
-import { getTheme } from "../theme"
-import { defineMessages, injectIntl } from "react-intl"
-import AppHeader from "../components/appHeader"
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getTheme } from '../theme'
+import { InjectedIntl, defineMessages, injectIntl } from 'react-intl'
+import AppHeader from '../components/appHeader'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { MdSettings } from 'react-icons/md'
 import styled from 'styled-components'
 import { getQueryParamsFromUrl } from '../utils/urlUtil'
-import { InjectedIntl } from 'react-intl';
 
 const Root = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  
+
   @media (max-width: 768px) {
     padding-top: 0;
     padding-left: 0;
@@ -35,11 +34,10 @@ interface State {
 }
 
 class HomePage extends Component<Props, State> {
-
   constructor(props: Props) {
     super(props)
     this.state = {
-      idle: true
+      idle: true,
     }
   }
 
@@ -48,15 +46,14 @@ class HomePage extends Component<Props, State> {
     if (!this.props.slogan || this.props.slogan.trim().length === 0) {
       const messages = defineMessages({
         defaultSlogan: {
-          id: 'slogan.default'
-        }
+          id: 'slogan.default',
+        },
       })
       const { intl } = this.props
       slogan = intl.formatMessage(messages.defaultSlogan)
     }
 
     return slogan.split('\n')
-      .filter(item => item !== undefined && item != null)
       .map(item => item.trim())
       .filter(item => item.length > 0)
   }
@@ -66,7 +63,7 @@ class HomePage extends Component<Props, State> {
   handleMouseMove = () => {
     if (this.state.idle) {
       this.setState({
-        idle: false
+        idle: false,
       })
     }
     if (this.mouseCountdown !== undefined) {
@@ -75,7 +72,7 @@ class HomePage extends Component<Props, State> {
     }
     this.mouseCountdown = window.setTimeout(
       () => this.setState({
-        idle: true
+        idle: true,
       }), 2000)
   }
 
@@ -90,14 +87,14 @@ class HomePage extends Component<Props, State> {
     const palette = getTheme(this.props.theme)
 
     const settingsIcon = (
-      <Link to={`/settings`}>
+      <Link to={'/settings'}>
         <h1><MdSettings
           style={{
             color: palette.textSecondary,
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}/></h1>
       </Link>
     )
@@ -105,13 +102,13 @@ class HomePage extends Component<Props, State> {
       <Root
         style={{
           background: palette.background,
-          cursor: this.state.idle ? 'none' : 'default'
+          cursor: this.state.idle ? 'none' : 'default',
         }}
         onMouseMove={this.handleMouseMove}>
         <ReactCSSTransitionGroup
           transitionLeaveTimeout={500}
           transitionEnterTimeout={300}
-          transitionName="fade">
+          transitionName='fade'>
           {this.state.idle ? undefined :
             <AppHeader
               style={{ position: 'absolute', top: 0, }}
@@ -123,7 +120,7 @@ class HomePage extends Component<Props, State> {
           height: '100%',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
         }}>
           <ShiftTextComponent
             textAlign={'center'}
@@ -146,7 +143,7 @@ const mapStateToProps = (state: any) => {
   return {
     language: state.settings.language,
     theme: getQueryParamsFromUrl('theme') || state.settings.theme,
-    slogan: slogan || state.settings.slogan
+    slogan: slogan || state.settings.slogan,
   }
 }
 

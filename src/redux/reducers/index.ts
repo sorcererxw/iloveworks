@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 import { SettingsReducer } from './settingsReducer'
 
 const rootReducer = combineReducers({
-  settings: SettingsReducer
+  settings: SettingsReducer,
 })
 
 export default rootReducer

@@ -4,10 +4,8 @@ import enUS from './enUS'
 import I18n from './i18n'
 
 export function getLocale(language: string): I18n {
-  let target = undefined
-  if (language !== undefined && language != null && language.length > 0) {
-    target = language
-  } else {
+  let target = language
+  if (!target) {
     // @ts-ignore
     target = navigator.userLanguage || navigator.language
   }

@@ -1,5 +1,5 @@
 import { Black, Dark, White, Light, ChromeDark } from './themes'
-import { ColorProperty } from "csstype";
+import { ColorProperty } from 'csstype'
 
 export interface Theme {
   primary: ColorProperty,

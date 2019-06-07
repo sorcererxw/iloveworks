@@ -1,5 +1,4 @@
 import React, { Component, CSSProperties, ReactNode } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -22,17 +21,12 @@ class AppHeader extends Component<{
   leftExtra?: ReactNode
   style?: CSSProperties
 }> {
-  static propTypes = {
-    leftExtra: PropTypes.object,
-    rightExtra: PropTypes.object
-  }
-
   render() {
     const { title, leftExtra, rightExtra } = this.props
     return (
       <header style={{
         width: '100%',
-        ...this.props.style
+        ...this.props.style,
       }}>
         <Container>
           {

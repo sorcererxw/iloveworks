@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
 import './settingsPage.css'
-import { Link, Route, Switch, NavLink, Redirect, RouteComponentProps } from 'react-router-dom'
+import {
+  Link,
+  Route,
+  Switch,
+  NavLink,
+  Redirect,
+  RouteComponentProps,
+  match as Match,
+} from 'react-router-dom'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
 import {
   updateLanguage,
   updateTheme,
   updateSlogan,
-  updateInterval
 } from '../redux/actions/settingsAction'
 import { getTheme } from '../theme'
 import { hexToRgbA } from '../utils/colorUtil'
@@ -32,12 +39,12 @@ const Sider = styled.div`
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  
+
   .selected {
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.1);
   }
-  
+
   @media (max-width: 768px) {
     box-sizing: border-box;
     border-right-width: 0;
@@ -60,12 +67,12 @@ const NavItem = styled.div`
   font-size: 1rem;
   white-space: pre;
   font-weight: 500;
-  
+
   :hover {
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.1);
   }
-  
+
   @media (max-width: 768px) {
     padding: 8px 16px 8px 16px;
     margin-right: 8px;
@@ -84,6 +91,19 @@ interface Props {
   theme: string
 }
 
+const mapStateToProps = (state: any) => ({
+  language: state.settings.language,
+  theme: state.settings.theme,
+  slogan: state.settings.slogan,
+  interval: state.settings.interval,
+})
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateLanguage: (language: string) => dispatch(updateLanguage(language)),
+  updateTheme: (theme: string) => dispatch(updateTheme(theme)),
+  updateSlogan: (slogan: string) => dispatch(updateSlogan(slogan)),
+})
+
 class SettingsPage extends Component<RouteComponentProps & Props> {
   state = {
     showMenu: true,
@@ -94,7 +114,7 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
     const palette = getTheme(theme)
 
     const meta = (
-      <FormattedMessage id="settings">
+      <FormattedMessage id='settings'>
         {name =>
           <Helmet>
             <title>{name}</title>
@@ -102,6 +122,10 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
         }
       </FormattedMessage>
     )
+
+    const renderRedirect = ((m: Match<any>) =>
+        () => <Redirect to={`${m.url}/appearance`}/>
+    )(match)
 
     const content = (
       <ContentContainer>
@@ -114,7 +138,7 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
                  component={connect(mapStateToProps, mapDispatchToProps)(AppearanceTab)}/>
           <Route exact path={`${match.url}/about`}
                  component={connect(mapStateToProps, mapDispatchToProps)(AboutTab)}/>
-          <Route render={() => <Redirect to={`${match.url}/appearance`}/>}/>
+          <Route render={renderRedirect}/>
         </Switch>
       </ContentContainer>
     )
@@ -122,11 +146,11 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
     const links = ['appearance', 'slogan', 'language', 'about']
 
     const closeIcon = (
-      <Link to={`/`}>
+      <Link to={'/'}>
         <MdClose style={{
           color: palette.textPrimary,
           fontSize: '2em',
-          verticalAlign: 'middle'
+          verticalAlign: 'middle',
         }}/>
       </Link>
     )
@@ -136,18 +160,22 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
         style={{
           color: palette.textPrimary,
           fontSize: '2em',
-          verticalAlign: 'middle'
+          verticalAlign: 'middle',
         }}
-        onClick={() => this.setState({ showMenu: !this.state.showMenu })}/>
+        onClick={
+          (
+            (page, showMenu) => () => page.setState({ showMenu })
+          )(this, !this.state.showMenu)
+        }/>
     )
 
     return (
       <Root style={{
         backgroundColor: palette.background,
-        color: palette.textPrimary
+        color: palette.textPrimary,
       }}>
         {meta}
-        <FormattedMessage id="settings">
+        <FormattedMessage id='settings'>
           {title => [
             <Default key={0}><AppHeader title={title} rightExtra={closeIcon}/></Default>,
             <Tablet key={1}><AppHeader title={title} leftExtra={closeIcon}/></Tablet>,
@@ -159,7 +187,7 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
           <main style={{
             height: '100%',
             display: 'flex',
-            flexDirection: 'row'
+            flexDirection: 'row',
           }}>
             <Sider
               style={{
@@ -187,7 +215,7 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
           <main style={{
             width: '100%',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
           }}>
             <Sider
               style={{
@@ -215,7 +243,7 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
           <main style={{
             width: '100%',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
           }}>
             {
               this.state.showMenu ?
@@ -224,7 +252,7 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
                     borderColor: hexToRgbA(palette.textSecondary, 0.2),
                     width: '100%',
                     display: 'flex',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
                   }}>
                   {
                     links.map((link, key) => (
@@ -249,19 +277,5 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
     )
   }
 }
-
-const mapStateToProps = (state: any) => ({
-  language: state.settings.language,
-  theme: state.settings.theme,
-  slogan: state.settings.slogan,
-  interval: state.settings.interval
-})
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  updateLanguage: (language: string) => dispatch(updateLanguage(language)),
-  updateTheme: (theme: string) => dispatch(updateTheme(theme)),
-  updateSlogan: (slogan: string) => dispatch(updateSlogan(slogan)),
-  updateInterval: (interval: number) => dispatch(updateInterval(interval))
-})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)

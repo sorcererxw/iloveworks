@@ -4,11 +4,12 @@
   "version": "0.1.4",
   "private": true,
   "dependencies": {
-    "autosize": "^4.0.2",
+    "csstype": "^2.6.5",
     "fbjs": "^1.0.0",
     "intl": "^1.2.5",
     "react": "^16.4.1",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-autosize-textarea": "^7.0.0",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.0.4",
@@ -25,8 +26,6 @@
     "styled-components": "^4.2.1"
   },
   "devDependencies": {
-    "tslint": "^5.17.0",
-    "tslint-jike-node": "^0.0.17",
     "@types/jest": "24.0.13",
     "@types/node": "12.0.4",
     "@types/react": "16.8.19",
@@ -41,15 +40,18 @@
     "@types/styled-components": "^4.1.16",
     "gh-pages": "^2.0.1",
     "redux-devtools": "^3.4.1",
+    "tslint": "^5.17.0",
+    "tslint-jike-node": "^0.0.17",
     "typescript": "3.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run lint && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "clean": "rm -r node_modules && rm yarn.lock",
     "predeploy": "npm run build",
+    "lint": "tslint --project .",
     "deploy": "gh-pages -d build"
   },
   "browserslist": {

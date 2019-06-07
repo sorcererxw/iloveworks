@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FormattedMessage } from "react-intl"
+import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
 
 const Title = styled.div`

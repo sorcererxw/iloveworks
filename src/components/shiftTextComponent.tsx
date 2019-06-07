@@ -4,7 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { ColorProperty, TextAlignProperty } from 'csstype'
 
 interface Props {
-  slogan: string[],
+  slogan?: string[],
   interval: number,
   fontColor: ColorProperty,
   fontSize: number,
@@ -12,7 +12,6 @@ interface Props {
 }
 
 class ShiftTextComponent extends Component<Props> {
-
   static defaultProps = {
     fontSize: 64,
     fontColor: '#000',
@@ -24,27 +23,27 @@ class ShiftTextComponent extends Component<Props> {
   index = 0
 
   state = {
-    displayText: ''
+    displayText: '',
   }
 
   updateIndex = () => {
     const slogan = this.props.slogan
     if (slogan === undefined) {
       this.setState({
-        displayText: ''
+        displayText: '',
       })
     } else {
-      if (this.index >= 2 * slogan.length) {
+      if (this.index >= slogan.length * 2) {
         this.index = 0
       }
       if (this.index % 2 === 1) {
         this.setState({
-          displayText: ''
+          displayText: '',
         })
         setTimeout(() => this.updateIndex(), this.props.interval * 1000 * 0.2)
       } else {
         this.setState({
-          displayText: slogan[this.index / 2]
+          displayText: slogan[this.index / 2],
         })
       }
       this.index++
@@ -74,13 +73,13 @@ class ShiftTextComponent extends Component<Props> {
       display.push(
         <ReactMarkdown
           key={i * 2}
-          renderers={{ 'paragraph': 'span' }}
+          renderers={{ paragraph: 'span' }}
           allowedTypes={[
             'root', 'paragraph', 'emphasis',
             'strong', 'delete', 'link', 'linkReference',
-            'text'
+            'text',
           ]}
-          source={split[i]}/>
+          source={split[i]}/>,
       )
     }
     return (
@@ -88,12 +87,12 @@ class ShiftTextComponent extends Component<Props> {
         userSelect: 'none',
         textAlign: this.props.textAlign,
         fontSize: this.props.fontSize,
-        color: this.props.fontColor
+        color: this.props.fontColor,
       }}>
         <ReactCSSTransitionGroup
           transitionLeaveTimeout={this.props.interval * 1000 * 0.2}
           transitionEnterTimeout={this.props.interval * 1000 * 0.2}
-          transitionName="fade">
+          transitionName='fade'>
           {display}
         </ReactCSSTransitionGroup>
       </div>

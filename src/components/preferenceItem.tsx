@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react'
-import { getTheme } from "../theme"
-import { hexToRgbA } from "../utils/colorUtil"
-import { FormattedMessage } from "react-intl"
+import { getTheme } from '../theme'
+import { hexToRgbA } from '../utils/colorUtil'
+import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -21,7 +21,7 @@ interface Props {
 export default class PreferenceItem extends Component<Props> {
   render(): ReactNode {
     const { title, titleId, actionView } = this.props
-    let itemView = (
+    const itemView = (
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
           {
@@ -38,7 +38,7 @@ export default class PreferenceItem extends Component<Props> {
 
     return (
       <Container style={{
-        borderColor: hexToRgbA(getTheme(this.props.theme).textSecondary, 0.2)
+        borderColor: hexToRgbA(getTheme(this.props.theme).textSecondary, 0.2),
       }}>
         {itemView}
         {this.props.children}

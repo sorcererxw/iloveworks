@@ -1,11 +1,11 @@
-import React, { Component } from "react"
-import { getTheme } from "../../theme"
-import { hexToRgbA } from "../../utils/colorUtil"
-import { FormattedMessage } from "react-intl"
-import PreferenceGroup from "../../components/preferenceGroup"
-import PreferenceItem from "../../components/preferenceItem"
+import React, { Component } from 'react'
+import { getTheme } from '../../theme'
+import { hexToRgbA } from '../../utils/colorUtil'
+import { FormattedMessage } from 'react-intl'
+import PreferenceGroup from '../../components/preferenceGroup'
+import PreferenceItem from '../../components/preferenceItem'
 import styled from 'styled-components'
-import { AnyAction } from "redux";
+import { AnyAction } from 'redux'
 
 const ThemeBlockContainer = styled.div`
   margin: 8px;
@@ -26,8 +26,9 @@ const ThemeBlockSelection = styled.div`
 `
 
 interface Props {
-  theme: string,
-  updateTheme: (theme: string) => AnyAction
+  theme?: string,
+
+  updateTheme(theme: string): AnyAction
 }
 
 class AppearanceTab extends Component<Props> {
@@ -40,7 +41,11 @@ class AppearanceTab extends Component<Props> {
     const themeBlock = (titleId: string, value: string) => {
       return (
         <ThemeBlockContainer
-          onClick={() => updateTheme(value)}
+          onClick={
+            (
+              (handle, v) => () => handle(v)
+            )(updateTheme, value)
+          }
           style={{
             borderColor: hexToRgbA(scheme.textSecondary, 0.2),
             color: getTheme(value).textPrimary,
@@ -48,7 +53,7 @@ class AppearanceTab extends Component<Props> {
           }}>
           <FormattedMessage id={titleId}/>
           <ThemeBlockSelection style={{
-            backgroundColor: value === theme ? scheme.accent : 'transparent'
+            backgroundColor: value === theme ? scheme.accent : 'transparent',
           }}/>
         </ThemeBlockContainer>
       )
