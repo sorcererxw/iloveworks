@@ -1,14 +1,18 @@
-import {Component} from "react"
-import getTheme from "../../theme/index"
-import {FormattedMessage} from "react-intl"
-import PreferenceGroup from "../../components/PerferenceGroup"
-import PreferenceItem from "../../components/PreferenceItem"
+import { Component } from "react"
+import { getTheme } from "../../theme"
+import { FormattedMessage } from "react-intl"
+import PreferenceGroup from "../../components/preferenceGroup"
+import PreferenceItem from "../../components/preferenceItem"
 import packageJson from "../../../package.json"
 import React from "react"
 
-export default class AboutTab extends Component {
+interface Props {
+  theme: string
+}
+
+export default class AboutTab extends Component<Props> {
   render() {
-    const {theme} = this.props
+    const { theme } = this.props
     const scheme = getTheme(theme)
     const about = <FormattedMessage id={'settings.about'}>
       {text =>
@@ -21,7 +25,7 @@ export default class AboutTab extends Component {
               <a href={'https://github.com/sorcererXW/iloveworks'}
                  target={'_blank'}
                  style={{
-                   fontWeight: '600',
+                   fontWeight: "bold",
                    color: scheme.accent
                  }}>
                 Github
@@ -33,7 +37,7 @@ export default class AboutTab extends Component {
               <a href={'https://github.com/sorcererXW/iloveworks/releases'}
                  target={'_blank'}
                  style={{
-                   fontWeight: '600',
+                   fontWeight: "bold",
                    color: scheme.accent
                  }}>
                 <FormattedMessage id={'settings.about.release_note'}/>

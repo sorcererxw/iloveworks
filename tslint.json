@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "tslint-jike-node"
+  ],
+  "rules": {
+    "file-name-casing": [
+      true,
+      "camel-case"
+    ]
+  }
+}

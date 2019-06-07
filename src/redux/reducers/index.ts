@@ -1,6 +1,6 @@
-import {combineReducers} from 'redux'
+import { combineReducers } from 'redux'
 
-import SettingsReducer from './SettingsReducer'
+import { SettingsReducer } from './settingsReducer'
 
 const rootReducer = combineReducers({
   settings: SettingsReducer

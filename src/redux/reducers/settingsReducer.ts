@@ -1,8 +1,9 @@
-import * as types from '../ActionTypes'
+import * as types from '../actionTypes'
+import { AnyAction } from 'redux'
 
 const initialState = {}
 
-export default function SettingsReducer(state = initialState, action) {
+export function SettingsReducer(state = initialState, action: AnyAction) {
   switch (action.type) {
     case types.UPDATE_LANGUAGE:
       return {

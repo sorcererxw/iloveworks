@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {FormattedMessage} from "react-intl"
+import React, { Component } from 'react'
+import { FormattedMessage } from "react-intl"
 import styled from 'styled-components'
 
 const Title = styled.div`
@@ -8,9 +8,12 @@ const Title = styled.div`
   font-size: 1.5rem;
 `
 
-export default class PreferenceGroup extends Component {
+export default class PreferenceGroup extends Component<{
+  title?: string | JSX.Element,
+  titleId?: string
+}> {
   render() {
-    const {title, titleId, children} = this.props
+    const { title, titleId, children } = this.props
 
     if (titleId !== undefined) {
       return (

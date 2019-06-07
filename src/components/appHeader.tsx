@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component, CSSProperties, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -16,14 +16,19 @@ const Title = styled.h1`
   margin: 0;
 `
 
-export default class AppHeader extends Component {
+class AppHeader extends Component<{
+  title?: string | JSX.Element,
+  rightExtra?: ReactNode
+  leftExtra?: ReactNode
+  style?: CSSProperties
+}> {
   static propTypes = {
     leftExtra: PropTypes.object,
     rightExtra: PropTypes.object
   }
 
   render() {
-    const {title, leftExtra, rightExtra} = this.props
+    const { title, leftExtra, rightExtra } = this.props
     return (
       <header style={{
         width: '100%',
@@ -32,15 +37,15 @@ export default class AppHeader extends Component {
         <Container>
           {
             leftExtra === undefined ? undefined :
-              <div style={{marginRight: 16,}}>
+              <div style={{ marginRight: 16, }}>
                 {leftExtra}
               </div>
           }
           <Title>{title}</Title>
-          <div style={{flex: 1}}/>
+          <div style={{ flex: 1 }}/>
           {
             rightExtra === undefined ? undefined :
-              <div style={{marginLeft: 16}}>
+              <div style={{ marginLeft: 16 }}>
                 {rightExtra}
               </div>
           }
@@ -49,3 +54,5 @@ export default class AppHeader extends Component {
     )
   }
 }
+
+export default AppHeader

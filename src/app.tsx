@@ -1,31 +1,36 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
-import HomePage from "./containers/HomePage"
-import SettingsPage from "./containers/SettingsPage"
+import HomePage from './containers/homePage'
+import SettingsPage from './containers/settingsPage'
 
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-import {getLocale} from './locale'
+import { getLocale } from './locale'
 
-import {addLocaleData, FormattedMessage, IntlProvider} from "react-intl"
+import { addLocaleData, FormattedMessage, IntlProvider } from 'react-intl'
 import zh from 'react-intl/locale-data/zh'
 import en from 'react-intl/locale-data/en'
-import {Helmet} from "react-helmet"
+import { Helmet } from 'react-helmet'
 
-import getTheme from "./theme"
-import {getQueryParamsFromUrl} from "./utils/urlUtil";
+import { getTheme } from './theme'
+import { getQueryParamsFromUrl } from './utils/urlUtil'
 
 addLocaleData([...en, ...zh])
 
-class App extends Component {
+interface Props {
+  theme: string
+  language: string
+}
+
+class App extends Component<Props> {
   render() {
     const theme = this.props.theme
     const scheme = getTheme(theme)
 
     const meta = (
-      <FormattedMessage id={"appName"}>
+      <FormattedMessage id={'appName'}>
         {appName =>
           <Helmet>
             <meta charSet="utf-8"/>
@@ -57,7 +62,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   return {
     language: getQueryParamsFromUrl('lang') || state.settings.language,
     theme: state.settings.theme

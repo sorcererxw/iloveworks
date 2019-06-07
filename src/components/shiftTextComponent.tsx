@@ -1,16 +1,17 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { ColorProperty, TextAlignProperty } from 'csstype'
 
-class ShiftTextComponent extends Component {
-  static propTypes = {
-    fontSize: PropTypes.number,
-    fontColor: PropTypes.string,
-    textAlign: PropTypes.oneOf(['center', 'left', 'right']),
-    slogan: PropTypes.array,
-    interval: PropTypes.number,
-  }
+interface Props {
+  slogan: string[],
+  interval: number,
+  fontColor: ColorProperty,
+  fontSize: number,
+  textAlign: TextAlignProperty
+}
+
+class ShiftTextComponent extends Component<Props> {
 
   static defaultProps = {
     fontSize: 64,
@@ -23,14 +24,14 @@ class ShiftTextComponent extends Component {
   index = 0
 
   state = {
-    displayText: ""
+    displayText: ''
   }
 
   updateIndex = () => {
     const slogan = this.props.slogan
     if (slogan === undefined) {
       this.setState({
-        displayText: ""
+        displayText: ''
       })
     } else {
       if (this.index >= 2 * slogan.length) {
@@ -50,6 +51,8 @@ class ShiftTextComponent extends Component {
     }
   }
 
+  timer: number | undefined = undefined
+
   componentDidMount() {
     this.updateIndex()
     this.timer = setInterval(this.updateIndex, this.props.interval * 1000)
@@ -62,14 +65,16 @@ class ShiftTextComponent extends Component {
   }
 
   render() {
-    const split = this.state.displayText ? this.state.displayText.split("|") : []
+    const split = this.state.displayText ? this.state.displayText.split('|') : []
     const display = []
     for (let i = 0; i < split.length; i++) {
-      if (i > 0) display.push(<br key={i * 2 - 1}/>)
+      if (i > 0) {
+        display.push(<br key={i * 2 - 1}/>)
+      }
       display.push(
         <ReactMarkdown
           key={i * 2}
-          renderers={{'paragraph': 'span'}}
+          renderers={{ 'paragraph': 'span' }}
           allowedTypes={[
             'root', 'paragraph', 'emphasis',
             'strong', 'delete', 'link', 'linkReference',

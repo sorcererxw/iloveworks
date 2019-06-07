@@ -1,3 +1,5 @@
+import I18n from "./i18n";
+
 export default {
   'appName': 'I ❤ Works',
 
@@ -39,4 +41,4 @@ export default {
   'settings.appearance.theme.light': 'Light',
   'settings.appearance.theme.dark': 'Dark',
   'settings.appearance.theme.chrome-dark': 'Chrome Dark',
-}
+} as I18n

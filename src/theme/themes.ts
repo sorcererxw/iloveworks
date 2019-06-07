@@ -1,3 +1,5 @@
+import { Theme } from "./index";
+
 export const White = {
   primary: '#fff',
   primaryDark: '#fff',
@@ -5,7 +7,7 @@ export const White = {
   accent: '#000',
   textPrimary: '#000',
   textSecondary: '#757575',
-}
+} as Theme
 
 export const Light = {
   primary: '#fefefe',
@@ -14,7 +16,7 @@ export const Light = {
   accent: '#000',
   textPrimary: '#212121',
   textSecondary: '#9E9E9E',
-}
+} as Theme
 
 export const Dark = {
   primary: '#323639',
@@ -23,7 +25,7 @@ export const Dark = {
   accent: '#fff',
   textPrimary: '#fafafa',
   textSecondary: '#d6d6d6',
-}
+} as Theme
 
 export const Black = {
   primary: '#1c2226',
@@ -32,7 +34,7 @@ export const Black = {
   accent: '#fff',
   textPrimary: '#fff',
   textSecondary: '#a0a0a1',
-}
+} as Theme
 
 export const ChromeDark = {
   primary: '#333639',
@@ -41,4 +43,4 @@ export const ChromeDark = {
   accent: '#fff',
   textPrimary: '#f1f3f4',
   textSecondary: '#9ba0a5',
-}
+} as Theme

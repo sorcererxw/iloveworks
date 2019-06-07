@@ -1,15 +1,16 @@
-import React, {Component} from 'react'
-import ShiftTextComponent from "../components/ShiftTextComponent"
-import './HomePage.css'
-import {Link} from "react-router-dom"
-import {connect} from "react-redux"
-import getTheme from "../theme"
-import {defineMessages, injectIntl} from "react-intl"
-import AppHeader from "../components/AppHeader"
+import React, { Component } from 'react'
+import ShiftTextComponent from "../components/shiftTextComponent"
+import './homePage.css'
+import { Link } from "react-router-dom"
+import { connect } from "react-redux"
+import { getTheme } from "../theme"
+import { defineMessages, injectIntl } from "react-intl"
+import AppHeader from "../components/appHeader"
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import {MdSettings} from 'react-icons/md'
+import { MdSettings } from 'react-icons/md'
 import styled from 'styled-components'
-import {getQueryParamsFromUrl} from '../utils/urlUtil'
+import { getQueryParamsFromUrl } from '../utils/urlUtil'
+import { InjectedIntl } from 'react-intl';
 
 const Root = styled.div`
   justify-content: center;
@@ -23,12 +24,26 @@ const Root = styled.div`
   }
 `
 
-class HomePage extends Component {
-  state = {
-    idle: true
+interface Props {
+  slogan: string
+  intl: InjectedIntl
+  theme: string
+}
+
+interface State {
+  idle: boolean
+}
+
+class HomePage extends Component<Props, State> {
+
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      idle: true
+    }
   }
 
-  getSlogan = () => {
+  getSlogan = (): string[] => {
     let slogan = this.props.slogan
     if (!this.props.slogan || this.props.slogan.trim().length === 0) {
       const messages = defineMessages({
@@ -36,7 +51,7 @@ class HomePage extends Component {
           id: 'slogan.default'
         }
       })
-      const {intl} = this.props
+      const { intl } = this.props
       slogan = intl.formatMessage(messages.defaultSlogan)
     }
 
@@ -46,7 +61,7 @@ class HomePage extends Component {
       .filter(item => item.length > 0)
   }
 
-  mouseCountdown = undefined
+  mouseCountdown: number | undefined = undefined
 
   handleMouseMove = () => {
     if (this.state.idle) {
@@ -72,8 +87,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const theme = this.props.theme
-    const palette = getTheme(theme)
+    const palette = getTheme(this.props.theme)
 
     const settingsIcon = (
       <Link to={`/settings`}>
@@ -100,7 +114,7 @@ class HomePage extends Component {
           transitionName="fade">
           {this.state.idle ? undefined :
             <AppHeader
-              style={{position: 'absolute', top: 0,}}
+              style={{ position: 'absolute', top: 0, }}
               rightExtra={settingsIcon}/>
           }
         </ReactCSSTransitionGroup>
@@ -123,7 +137,7 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   let slogan = getQueryParamsFromUrl('slogan')
   if (slogan) {
     slogan = slogan.replace('||', '\n')

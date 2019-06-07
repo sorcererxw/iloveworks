@@ -1,3 +1,5 @@
+import I18n from "./i18n";
+
 export default {
   'appName': '我爱工作',
 
@@ -39,4 +41,4 @@ export default {
   'settings.appearance.theme.light': '亮 色',
   'settings.appearance.theme.dark': '暗 色',
   'settings.appearance.theme.chrome-dark': 'Chrome(暗)',
-}
+} as I18n

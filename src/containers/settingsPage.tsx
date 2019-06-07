@@ -1,25 +1,23 @@
-import React, {Component} from 'react'
-import './SettingsPage.css'
-import {Link, Route, Switch, NavLink, Redirect} from "react-router-dom"
-import {FormattedMessage, injectIntl} from "react-intl"
-import {connect} from "react-redux"
-import {updateLanguage, updateTheme, updateSlogan, updateInterval} from "../redux/actions/SettingsAcrion"
-import getTheme from '../theme'
-import {hexToRgbA} from '../utils/colorUtil'
-import {Helmet} from "react-helmet"
-import AppHeader from "../components/AppHeader"
-import Responsive from 'react-responsive'
-import {MdClose, MdMoreVert} from 'react-icons/md'
-import LanguageTab from "./tabs/LanguageTab"
-import SloganTab from "./tabs/SloganTab"
-import AppearanceTab from "./tabs/AppearanceTab"
-import ApplicationTab from "./tabs/ApplicationTab"
-import AboutTab from "./tabs/AboutTab"
+import React, { Component } from 'react'
+import './settingsPage.css'
+import { Link, Route, Switch, NavLink, Redirect, RouteComponentProps } from 'react-router-dom'
+import { FormattedMessage, injectIntl } from 'react-intl'
+import { connect } from 'react-redux'
+import {
+  updateLanguage,
+  updateTheme,
+  updateSlogan,
+  updateInterval
+} from '../redux/actions/settingsAction'
+import { getTheme } from '../theme'
+import { hexToRgbA } from '../utils/colorUtil'
+import { Helmet } from 'react-helmet'
+import { MdClose, MdMoreVert } from 'react-icons/md'
+import { AppearanceTab, AboutTab, SloganTab, LanguageTab } from './tabs'
 import styled from 'styled-components'
-
-const Mobile = props => <Responsive {...props} maxWidth={425}/>
-const Tablet = props => <Responsive {...props} minWidth={426} maxWidth={768}/>
-const Default = props => <Responsive {...props} minWidth={769}/>
+import { Dispatch } from 'redux'
+import AppHeader from '../components/appHeader'
+import { Default, Mobile, Tablet } from '../components/responsive'
 
 const Root = styled.div`
   min-height: 100vh;
@@ -82,13 +80,17 @@ const ContentContainer = styled.div`
   flex-direction: column;
 `
 
-class SettingsPage extends Component {
+interface Props {
+  theme: string
+}
+
+class SettingsPage extends Component<RouteComponentProps & Props> {
   state = {
     showMenu: true,
   }
 
   render() {
-    const {match, theme} = this.props
+    const { match, theme } = this.props
     const palette = getTheme(theme)
 
     const meta = (
@@ -110,8 +112,6 @@ class SettingsPage extends Component {
                  component={connect(mapStateToProps, mapDispatchToProps)(LanguageTab)}/>
           <Route exact path={`${match.url}/appearance`}
                  component={connect(mapStateToProps, mapDispatchToProps)(AppearanceTab)}/>
-          <Route exact path={`${match.url}/application`}
-                 component={connect(mapStateToProps, mapDispatchToProps)(ApplicationTab)}/>
           <Route exact path={`${match.url}/about`}
                  component={connect(mapStateToProps, mapDispatchToProps)(AboutTab)}/>
           <Route render={() => <Redirect to={`${match.url}/appearance`}/>}/>
@@ -138,7 +138,7 @@ class SettingsPage extends Component {
           fontSize: '2em',
           verticalAlign: 'middle'
         }}
-        onClick={() => this.setState({showMenu: !this.state.showMenu})}/>
+        onClick={() => this.setState({ showMenu: !this.state.showMenu })}/>
     )
 
     return (
@@ -151,7 +151,8 @@ class SettingsPage extends Component {
           {title => [
             <Default key={0}><AppHeader title={title} rightExtra={closeIcon}/></Default>,
             <Tablet key={1}><AppHeader title={title} leftExtra={closeIcon}/></Tablet>,
-            <Mobile key={2}><AppHeader title={title} leftExtra={closeIcon} rightExtra={moreIcon}/></Mobile>,
+            <Mobile key={2}><AppHeader title={title} leftExtra={closeIcon}
+                                       rightExtra={moreIcon}/></Mobile>,
           ]}
         </FormattedMessage>
         <Default>
@@ -169,8 +170,8 @@ class SettingsPage extends Component {
                   <NavLink
                     key={key}
                     activeClassName={'selected'}
-                    activeStyle={{color: palette.textPrimary}}
-                    style={{color: palette.textSecondary}}
+                    activeStyle={{ color: palette.textPrimary }}
+                    style={{ color: palette.textSecondary }}
                     to={`${match.url}/${link}`}>
                     <NavItem>
                       <FormattedMessage id={`settings.${link}`}/>
@@ -197,8 +198,8 @@ class SettingsPage extends Component {
                   <NavLink
                     key={key}
                     activeClassName={'selected'}
-                    activeStyle={{color: palette.textPrimary}}
-                    style={{color: palette.textSecondary}}
+                    activeStyle={{ color: palette.textPrimary }}
+                    style={{ color: palette.textSecondary }}
                     to={`${match.url}/${link}`}>
                     <NavItem>
                       <FormattedMessage id={`settings.${link}`}/>
@@ -230,8 +231,8 @@ class SettingsPage extends Component {
                       <NavLink
                         key={key}
                         activeClassName={'selected'}
-                        activeStyle={{color: palette.textPrimary}}
-                        style={{color: palette.textSecondary}}
+                        activeStyle={{ color: palette.textPrimary }}
+                        style={{ color: palette.textSecondary }}
                         to={`${match.url}/${link}`}>
                         <NavItem>
                           <FormattedMessage id={`settings.${link}`}/>
@@ -249,20 +250,18 @@ class SettingsPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    language: state.settings.language,
-    theme: state.settings.theme,
-    slogan: state.settings.slogan,
-    interval: state.settings.interval
-  }
-}
+const mapStateToProps = (state: any) => ({
+  language: state.settings.language,
+  theme: state.settings.theme,
+  slogan: state.settings.slogan,
+  interval: state.settings.interval
+})
 
-const mapDispatchToProps = dispatch => ({
-  updateLanguage: language => dispatch(updateLanguage(language)),
-  updateTheme: theme => dispatch(updateTheme(theme)),
-  updateSlogan: slogan => dispatch(updateSlogan(slogan)),
-  updateInterval: interval => dispatch(updateInterval(interval))
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateLanguage: (language: string) => dispatch(updateLanguage(language)),
+  updateTheme: (theme: string) => dispatch(updateTheme(theme)),
+  updateSlogan: (slogan: string) => dispatch(updateSlogan(slogan)),
+  updateInterval: (interval: number) => dispatch(updateInterval(interval))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)

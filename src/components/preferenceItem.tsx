@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import getTheme from "../theme"
-import {hexToRgbA} from "../utils/colorUtil"
-import {FormattedMessage} from "react-intl"
+import React, { Component, ReactNode } from 'react'
+import { getTheme } from "../theme"
+import { hexToRgbA } from "../utils/colorUtil"
+import { FormattedMessage } from "react-intl"
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -11,19 +11,26 @@ const Container = styled.div`
   border-bottom-width: 1px;
 `
 
-export default class PreferenceItem extends Component {
-  render() {
-    const {title, titleId, actionView} = this.props
+interface Props {
+  title?: string,
+  titleId?: string,
+  actionView?: ReactNode
+  theme?: string
+}
+
+export default class PreferenceItem extends Component<Props> {
+  render(): ReactNode {
+    const { title, titleId, actionView } = this.props
     let itemView = (
-      <div style={{display: 'flex'}}>
-        <div style={{flex: 1}}>
+      <div style={{ display: 'flex' }}>
+        <div style={{ flex: 1 }}>
           {
             titleId ?
               <FormattedMessage id={titleId}/> :
               <span>{title}</span>
           }
         </div>
-        <div style={{flex: 2}}>
+        <div style={{ flex: 2 }}>
           <div>{actionView}</div>
         </div>
       </div>
