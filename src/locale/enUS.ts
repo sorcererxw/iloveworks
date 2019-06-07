@@ -3,16 +3,14 @@ import I18n from './i18n'
 export default {
   appName: 'I ❤ Works',
 
-  'slogan.default': `
-  **Excellent**| is a habit
-  **Excellent**| is a gift
-  **I love working**
-  Working makes me happy
-  I am in the ocean of work
-  Boss told me to have lunch | I turn a deaf ear
-  Colleagues call me to drink | I am indifferent
-  Manager call me to sleep | I refuse strongly
-  `,
+  'slogan.default': `**Excellent**| is a habit
+**Excellent**| is a gift
+**I love working**
+Working makes me happy
+I am in the ocean of work
+Boss told me to have lunch | I turn a deaf ear
+Colleagues call me to drink | I am indifferent
+Manager call me to sleep | I refuse strongly`,
   'action.ok': 'OK',
   'action.save': 'Save',
   'action.save.success': 'Saved successfully',
@@ -28,12 +26,11 @@ export default {
   'settings.slogan': 'Slogan',
   'settings.slogan.syntax': 'Syntax description',
   'settings.slogan.syntax.summary': `
-  One line statement is a paragraph, use \'|\' to perform line break
-  And you can use some basic Markdown inline syntax:
-  \`**Bold**\` ⇨ **Bold**
-  \`*Italic*\` ⇨ *Italic*
-  \`~~Delete~~\` ⇨ ~~Delete~~
-  `,
+One line statement is a paragraph, use \'|\' to perform line break
+And you can use some basic Markdown inline syntax:
+\`**Bold**\` ⇨ **Bold**
+\`*Italic*\` ⇨ *Italic*
+\`~~Delete~~\` ⇨ ~~Delete~~`,
   'settings.slogan.custom': 'Custom slogan',
   'settings.slogan.interval': 'Interval',
   'settings.about.release_note': 'Release Notes',
