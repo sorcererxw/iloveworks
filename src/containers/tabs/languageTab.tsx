@@ -4,6 +4,24 @@ import PreferenceGroup from '../../components/preferenceGroup'
 import PreferenceItem from '../../components/preferenceItem'
 import { FormattedMessage } from 'react-intl'
 import { AnyAction } from 'redux'
+import styled from 'styled-components'
+
+const Select = styled.select`
+  font-size: 100%;
+  border-radius: 4px;
+  font-family: sans-serif;
+  line-height: 1.2rem;
+  align-items: center;
+  padding: 2px;
+  display: inline-block;
+  text-align: start;
+  height: auto;
+  border-color: rgb(169, 169, 169);
+
+  :focus {
+    outline-style: none;
+  }
+`
 
 interface Props {
   theme: string,
@@ -22,8 +40,7 @@ export default class LanguageTab extends Component<Props> {
     return (
       <PreferenceGroup titleId={'settings.language'}>
         <PreferenceItem>
-          <select
-            className={'setting-select'}
+          <Select
             style={{
               backgroundColor: scheme.primary,
               color: scheme.textPrimary,
@@ -36,7 +53,7 @@ export default class LanguageTab extends Component<Props> {
             <option value='zh-Hans'>简体中文</option>
             <option value='zh-Hant'>正體中文</option>
             <option value='en-US'>English</option>
-          </select>
+          </Select>
         </PreferenceItem>
       </PreferenceGroup>
     )

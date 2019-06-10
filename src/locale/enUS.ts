@@ -27,9 +27,13 @@ Manager call me to sleep | I refuse strongly`,
   'settings.slogan.syntax': 'Syntax description',
   'settings.slogan.syntax.summary': `
 One line statement is a paragraph, use \'|\' to perform line break
+
 And you can use some basic Markdown inline syntax:
+
 \`**Bold**\` ⇨ **Bold**
+
 \`*Italic*\` ⇨ *Italic*
+
 \`~~Delete~~\` ⇨ ~~Delete~~`,
   'settings.slogan.custom': 'Custom slogan',
   'settings.slogan.interval': 'Interval',

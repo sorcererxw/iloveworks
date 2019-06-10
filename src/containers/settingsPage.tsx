@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './settingsPage.css'
 import {
   Link,
   Route,
@@ -59,7 +58,7 @@ const Sider = styled.div`
   }
 `
 
-const NavItem = styled.div`
+const NavItem = styled(NavLink)`
   text-decoration: none;
   padding: 8px 32px 8px 16px;
   margin-bottom: 16px;
@@ -69,6 +68,11 @@ const NavItem = styled.div`
   font-weight: 500;
 
   :hover {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &.active {
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -169,6 +173,75 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
         }/>
     )
 
+    const navItems = links.map((link, key) => (
+      <NavItem
+        key={key}
+        activeClassName={'selected'}
+        activeStyle={{ color: palette.textPrimary }}
+        style={{ color: palette.textSecondary }}
+        to={`${match.url}/${link}`}>
+        <FormattedMessage id={`settings.${link}`}/>
+      </NavItem>
+    ))
+
+    const desktopView = (
+      <Default>
+        <main style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+        }}>
+          <Sider
+            style={{
+              borderColor: hexToRgbA(palette.textSecondary, 0.2),
+            }}>
+            {navItems}
+          </Sider>
+          {content}
+        </main>
+      </Default>
+    )
+
+    const tabletView = (
+      <Tablet>
+        <main style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+          <Sider
+            style={{
+              borderColor: hexToRgbA(palette.textSecondary, 0.2),
+            }}>
+            {navItems}
+          </Sider>
+          {content}
+        </main>
+      </Tablet>
+    )
+    const mobileView = (
+      <Mobile>
+        <main style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+          {
+            this.state.showMenu ?
+              <Sider
+                style={{
+                  borderColor: hexToRgbA(palette.textSecondary, 0.2),
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}>
+                {navItems}
+              </Sider> : undefined
+          }
+          {content}
+        </main>
+      </Mobile>
+    )
     return (
       <Root style={{
         backgroundColor: palette.background,
@@ -183,96 +256,9 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
                                        rightExtra={moreIcon}/></Mobile>,
           ]}
         </FormattedMessage>
-        <Default>
-          <main style={{
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-          }}>
-            <Sider
-              style={{
-                borderColor: hexToRgbA(palette.textSecondary, 0.2),
-              }}>
-              {
-                links.map((link, key) => (
-                  <NavLink
-                    key={key}
-                    activeClassName={'selected'}
-                    activeStyle={{ color: palette.textPrimary }}
-                    style={{ color: palette.textSecondary }}
-                    to={`${match.url}/${link}`}>
-                    <NavItem>
-                      <FormattedMessage id={`settings.${link}`}/>
-                    </NavItem>
-                  </NavLink>
-                ))
-              }
-            </Sider>
-            {content}
-          </main>
-        </Default>
-        <Tablet>
-          <main style={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-          }}>
-            <Sider
-              style={{
-                borderColor: hexToRgbA(palette.textSecondary, 0.2),
-              }}>
-              {
-                links.map((link, key) => (
-                  <NavLink
-                    key={key}
-                    activeClassName={'selected'}
-                    activeStyle={{ color: palette.textPrimary }}
-                    style={{ color: palette.textSecondary }}
-                    to={`${match.url}/${link}`}>
-                    <NavItem>
-                      <FormattedMessage id={`settings.${link}`}/>
-                    </NavItem>
-                  </NavLink>
-                ))
-              }
-            </Sider>
-            {content}
-          </main>
-        </Tablet>
-        <Mobile>
-          <main style={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-          }}>
-            {
-              this.state.showMenu ?
-                <Sider
-                  style={{
-                    borderColor: hexToRgbA(palette.textSecondary, 0.2),
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}>
-                  {
-                    links.map((link, key) => (
-                      <NavLink
-                        key={key}
-                        activeClassName={'selected'}
-                        activeStyle={{ color: palette.textPrimary }}
-                        style={{ color: palette.textSecondary }}
-                        to={`${match.url}/${link}`}>
-                        <NavItem>
-                          <FormattedMessage id={`settings.${link}`}/>
-                        </NavItem>
-                      </NavLink>
-                    ))
-                  }
-                </Sider> : undefined
-            }
-            {content}
-          </main>
-        </Mobile>
+        {desktopView}
+        {tabletView}
+        {mobileView}
       </Root>
     )
   }

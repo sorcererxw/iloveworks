@@ -7,6 +7,39 @@ import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md'
 import ReactMarkdown from 'react-markdown'
 import { AnyAction } from 'redux'
 import { TextareaAutosize } from 'react-autosize-textarea/lib/TextareaAutosize'
+import styled from 'styled-components'
+
+const SloganTextarea = styled(TextareaAutosize)`
+  font-size: 1.2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 16px;
+  line-height: 1.8rem;
+  min-height: 10rem;
+  resize: none;
+  overflow: hidden;
+
+  :focus {
+    outline-style: none;
+  }
+`
+
+const ButtonBar = styled.div`
+  display: inline-block;
+  margin-top: 16px;
+  margin-bottom: 8px;
+
+  >button {
+    margin: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 1rem;
+    border-radius: 4px;
+    border-color: rgba(0, 0, 0, 0);
+  }
+`
 
 interface Props {
   theme: string
@@ -91,10 +124,9 @@ export default class SloganTab extends Component<Props, State> {
       <PreferenceGroup titleId={'settings.slogan.custom'}>
         <PreferenceItem>
           <div>
-            <TextareaAutosize
+            <SloganTextarea
               onChange={this.onTextChange}
               value={this.state.text}
-              className={'slogan-textarea'}
               spellCheck={false}
               style={{
                 backgroundColor: scheme.primary,
@@ -153,7 +185,7 @@ export default class SloganTab extends Component<Props, State> {
             flexDirection: 'row',
           }}>
             <div style={{ flex: 1 }}/>
-            <div className={'button-bar'}>
+            <ButtonBar className={'button-bar'}>
               <button onClick={this.onReset}
                       style={{
                         backgroundColor: scheme.primary,
@@ -168,7 +200,7 @@ export default class SloganTab extends Component<Props, State> {
                       }}>
                 <FormattedMessage id={'action.save'}/>
               </button>
-            </div>
+            </ButtonBar>
           </div>
         </PreferenceItem>
       </PreferenceGroup>
