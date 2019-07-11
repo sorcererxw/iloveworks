@@ -33,9 +33,9 @@ class App extends Component<Props> {
       <FormattedMessage id={'appName'}>
         {appName => (
           <Helmet>
-            <meta charSet="utf-8" />
+            <meta charSet='utf-8' />
             <title>{appName}</title>
-            <meta name="theme-color" content={scheme.background} />
+            <meta name='theme-color' content={scheme.background} />
           </Helmet>
         )}
       </FormattedMessage>

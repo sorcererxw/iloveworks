@@ -116,7 +116,7 @@ class HomePage extends Component<Props, State> {
         <ReactCSSTransitionGroup
           transitionLeaveTimeout={500}
           transitionEnterTimeout={300}
-          transitionName="fade"
+          transitionName='fade'
         >
           {this.state.idle ? (
             undefined

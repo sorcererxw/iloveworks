@@ -114,7 +114,7 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
     const palette = getTheme(theme)
 
     const meta = (
-      <FormattedMessage id="settings">
+      <FormattedMessage id='settings'>
         {name => (
           <Helmet>
             <title>{name}</title>
@@ -281,7 +281,7 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
         }}
       >
         {meta}
-        <FormattedMessage id="settings">
+        <FormattedMessage id='settings'>
           {title => [
             <Default key={0}>
               <AppHeader title={title} rightExtra={closeIcon} />

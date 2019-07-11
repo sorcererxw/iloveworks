@@ -76,7 +76,7 @@ class ShiftText extends Component<Props> {
         <ReactCSSTransitionGroup
           transitionLeaveTimeout={this.props.interval * 1000 * 0.2}
           transitionEnterTimeout={this.props.interval * 1000 * 0.2}
-          transitionName="fade"
+          transitionName='fade'
         >
           <DisplaySlogan displayText={this.state.displayText} />
         </ReactCSSTransitionGroup>
