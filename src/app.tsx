@@ -31,22 +31,22 @@ class App extends Component<Props> {
 
     const meta = (
       <FormattedMessage id={'appName'}>
-        {appName =>
+        {appName => (
           <Helmet>
-            <meta charSet='utf-8'/>
+            <meta charSet="utf-8" />
             <title>{appName}</title>
-            <meta name='theme-color' content={scheme.background}/>
+            <meta name="theme-color" content={scheme.background} />
           </Helmet>
-        }
+        )}
       </FormattedMessage>
     )
 
     const route = (
       <BrowserRouter>
         <Switch>
-          <Route exact path={'/'} component={HomePage}/>
-          <Route path={'/settings'} component={SettingsPage}/>
-          <Route render={(() => () => <Redirect to={'/'}/>)()}/>
+          <Route exact path={'/'} component={HomePage} />
+          <Route path={'/settings'} component={SettingsPage} />
+          <Route render={(() => () => <Redirect to={'/'} />)()} />
         </Switch>
       </BrowserRouter>
     )
@@ -69,4 +69,7 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-export default connect(mapStateToProps, null)(App)
+export default connect(
+  mapStateToProps,
+  null,
+)(App)

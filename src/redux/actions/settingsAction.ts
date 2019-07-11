@@ -1,8 +1,4 @@
-import {
-  UPDATE_LANGUAGE,
-  UPDATE_SLOGAN,
-  UPDATE_THEME,
-} from '../actionTypes'
+import { UPDATE_LANGUAGE, UPDATE_SLOGAN, UPDATE_THEME } from '../actionTypes'
 import { AnyAction } from 'redux'
 
 export const updateLanguage = (language: string): AnyAction => ({

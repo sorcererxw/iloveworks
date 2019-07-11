@@ -7,5 +7,10 @@
       true,
       "camel-case"
     ]
+  },
+  "linterOptions": {
+    "exclude": [
+      "src/react-app-env.d.ts"
+    ]
   }
 }

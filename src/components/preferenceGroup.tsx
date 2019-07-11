@@ -9,7 +9,7 @@ const Title = styled.div`
 `
 
 export default class PreferenceGroup extends Component<{
-  title?: string | JSX.Element,
+  title?: string | JSX.Element
   titleId?: string
 }> {
   render() {
@@ -18,21 +18,15 @@ export default class PreferenceGroup extends Component<{
     if (titleId !== undefined) {
       return (
         <div>
-          <FormattedMessage id={titleId}>
-            {text => <Title>{text}</Title>}
-          </FormattedMessage>
-          <div>
-            {children}
-          </div>
+          <FormattedMessage id={titleId}>{text => <Title>{text}</Title>}</FormattedMessage>
+          <div>{children}</div>
         </div>
       )
     }
     return (
       <div>
         <Title>{title}</Title>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </div>
     )
   }

@@ -10,11 +10,7 @@ import {
 } from 'react-router-dom'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
-import {
-  updateLanguage,
-  updateTheme,
-  updateSlogan,
-} from '../redux/actions/settingsAction'
+import { updateLanguage, updateTheme, updateSlogan } from '../redux/actions/settingsAction'
 import { getTheme } from '../theme'
 import { hexToRgbA } from '../utils/colorUtil'
 import { Helmet } from 'react-helmet'
@@ -53,7 +49,7 @@ const Sider = styled.div`
     overflow: auto;
 
     ::-webkit-scrollbar {
-        width: 0 !important;
+      width: 0 !important;
     }
   }
 `
@@ -118,31 +114,53 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
     const palette = getTheme(theme)
 
     const meta = (
-      <FormattedMessage id='settings'>
-        {name =>
+      <FormattedMessage id="settings">
+        {name => (
           <Helmet>
             <title>{name}</title>
           </Helmet>
-        }
+        )}
       </FormattedMessage>
     )
 
-    const renderRedirect = ((m: Match<any>) =>
-        () => <Redirect to={`${m.url}/appearance`}/>
-    )(match)
+    const renderRedirect = ((m: Match<any>) => () => <Redirect to={`${m.url}/appearance`} />)(match)
 
     const content = (
       <ContentContainer>
         <Switch>
-          <Route exact path={`${match.url}/slogan`}
-                 component={connect(mapStateToProps, mapDispatchToProps)(injectIntl(SloganTab))}/>
-          <Route exact path={`${match.url}/language`}
-                 component={connect(mapStateToProps, mapDispatchToProps)(LanguageTab)}/>
-          <Route exact path={`${match.url}/appearance`}
-                 component={connect(mapStateToProps, mapDispatchToProps)(AppearanceTab)}/>
-          <Route exact path={`${match.url}/about`}
-                 component={connect(mapStateToProps, mapDispatchToProps)(AboutTab)}/>
-          <Route render={renderRedirect}/>
+          <Route
+            exact
+            path={`${match.url}/slogan`}
+            component={connect(
+              mapStateToProps,
+              mapDispatchToProps,
+            )(injectIntl(SloganTab))}
+          />
+          <Route
+            exact
+            path={`${match.url}/language`}
+            component={connect(
+              mapStateToProps,
+              mapDispatchToProps,
+            )(LanguageTab)}
+          />
+          <Route
+            exact
+            path={`${match.url}/appearance`}
+            component={connect(
+              mapStateToProps,
+              mapDispatchToProps,
+            )(AppearanceTab)}
+          />
+          <Route
+            exact
+            path={`${match.url}/about`}
+            component={connect(
+              mapStateToProps,
+              mapDispatchToProps,
+            )(AboutTab)}
+          />
+          <Route render={renderRedirect} />
         </Switch>
       </ContentContainer>
     )
@@ -151,11 +169,13 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
 
     const closeIcon = (
       <Link to={'/'}>
-        <MdClose style={{
-          color: palette.textPrimary,
-          fontSize: '2em',
-          verticalAlign: 'middle',
-        }}/>
+        <MdClose
+          style={{
+            color: palette.textPrimary,
+            fontSize: '2em',
+            verticalAlign: 'middle',
+          }}
+        />
       </Link>
     )
 
@@ -166,11 +186,11 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
           fontSize: '2em',
           verticalAlign: 'middle',
         }}
-        onClick={
-          (
-            (page, showMenu) => () => page.setState({ showMenu })
-          )(this, !this.state.showMenu)
-        }/>
+        onClick={((page, showMenu) => () => page.setState({ showMenu }))(
+          this,
+          !this.state.showMenu,
+        )}
+      />
     )
 
     const navItems = links.map((link, key) => (
@@ -179,22 +199,26 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
         activeClassName={'selected'}
         activeStyle={{ color: palette.textPrimary }}
         style={{ color: palette.textSecondary }}
-        to={`${match.url}/${link}`}>
-        <FormattedMessage id={`settings.${link}`}/>
+        to={`${match.url}/${link}`}
+      >
+        <FormattedMessage id={`settings.${link}`} />
       </NavItem>
     ))
 
     const desktopView = (
       <Default>
-        <main style={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-        }}>
+        <main
+          style={{
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
           <Sider
             style={{
               borderColor: hexToRgbA(palette.textSecondary, 0.2),
-            }}>
+            }}
+          >
             {navItems}
           </Sider>
           {content}
@@ -204,15 +228,18 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
 
     const tabletView = (
       <Tablet>
-        <main style={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-        }}>
+        <main
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           <Sider
             style={{
               borderColor: hexToRgbA(palette.textSecondary, 0.2),
-            }}>
+            }}
+          >
             {navItems}
           </Sider>
           {content}
@@ -221,39 +248,50 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
     )
     const mobileView = (
       <Mobile>
-        <main style={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-        }}>
-          {
-            this.state.showMenu ?
-              <Sider
-                style={{
-                  borderColor: hexToRgbA(palette.textSecondary, 0.2),
-                  width: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}>
-                {navItems}
-              </Sider> : undefined
-          }
+        <main
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          {this.state.showMenu ? (
+            <Sider
+              style={{
+                borderColor: hexToRgbA(palette.textSecondary, 0.2),
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              {navItems}
+            </Sider>
+          ) : (
+            undefined
+          )}
           {content}
         </main>
       </Mobile>
     )
     return (
-      <Root style={{
-        backgroundColor: palette.background,
-        color: palette.textPrimary,
-      }}>
+      <Root
+        style={{
+          backgroundColor: palette.background,
+          color: palette.textPrimary,
+        }}
+      >
         {meta}
-        <FormattedMessage id='settings'>
+        <FormattedMessage id="settings">
           {title => [
-            <Default key={0}><AppHeader title={title} rightExtra={closeIcon}/></Default>,
-            <Tablet key={1}><AppHeader title={title} leftExtra={closeIcon}/></Tablet>,
-            <Mobile key={2}><AppHeader title={title} leftExtra={closeIcon}
-                                       rightExtra={moreIcon}/></Mobile>,
+            <Default key={0}>
+              <AppHeader title={title} rightExtra={closeIcon} />
+            </Default>,
+            <Tablet key={1}>
+              <AppHeader title={title} leftExtra={closeIcon} />
+            </Tablet>,
+            <Mobile key={2}>
+              <AppHeader title={title} leftExtra={closeIcon} rightExtra={moreIcon} />
+            </Mobile>,
           ]}
         </FormattedMessage>
         {desktopView}
@@ -264,4 +302,7 @@ class SettingsPage extends Component<RouteComponentProps & Props> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SettingsPage)

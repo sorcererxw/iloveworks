@@ -8,8 +8,8 @@ import rootReducer from './reducers/index'
 const middlewares = [logger]
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
 
-const enhancer = window.__REDUX_DEVTOOLS_EXTENSION__
-  && window.__REDUX_DEVTOOLS_EXTENSION__({ actionCreators })
+const enhancer =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__({ actionCreators })
 
 const persistConfig = {
   key: 'root',

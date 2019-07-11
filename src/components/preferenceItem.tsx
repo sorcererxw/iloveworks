@@ -12,8 +12,8 @@ const Container = styled.div`
 `
 
 interface Props {
-  title?: string,
-  titleId?: string,
+  title?: string
+  titleId?: string
   actionView?: ReactNode
   theme?: string
 }
@@ -24,11 +24,7 @@ export default class PreferenceItem extends Component<Props> {
     const itemView = (
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
-          {
-            titleId ?
-              <FormattedMessage id={titleId}/> :
-              <span>{title}</span>
-          }
+          {titleId ? <FormattedMessage id={titleId} /> : <span>{title}</span>}
         </div>
         <div style={{ flex: 2 }}>
           <div>{actionView}</div>
@@ -37,9 +33,11 @@ export default class PreferenceItem extends Component<Props> {
     )
 
     return (
-      <Container style={{
-        borderColor: hexToRgbA(getTheme(this.props.theme).textSecondary, 0.2),
-      }}>
+      <Container
+        style={{
+          borderColor: hexToRgbA(getTheme(this.props.theme).textSecondary, 0.2),
+        }}
+      >
         {itemView}
         {this.props.children}
       </Container>

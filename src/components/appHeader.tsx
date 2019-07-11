@@ -16,7 +16,7 @@ const Title = styled.h1`
 `
 
 class AppHeader extends Component<{
-  title?: string | JSX.Element,
+  title?: string | JSX.Element
   rightExtra?: ReactNode
   leftExtra?: ReactNode
   style?: CSSProperties
@@ -24,25 +24,21 @@ class AppHeader extends Component<{
   render() {
     const { title, leftExtra, rightExtra } = this.props
     return (
-      <header style={{
-        width: '100%',
-        ...this.props.style,
-      }}>
+      <header
+        style={{
+          width: '100%',
+          ...this.props.style,
+        }}
+      >
         <Container>
-          {
-            leftExtra === undefined ? undefined :
-              <div style={{ marginRight: 16, }}>
-                {leftExtra}
-              </div>
-          }
+          {leftExtra === undefined ? undefined : <div style={{ marginRight: 16 }}>{leftExtra}</div>}
           <Title>{title}</Title>
-          <div style={{ flex: 1 }}/>
-          {
-            rightExtra === undefined ? undefined :
-              <div style={{ marginLeft: 16 }}>
-                {rightExtra}
-              </div>
-          }
+          <div style={{ flex: 1 }} />
+          {rightExtra === undefined ? (
+            undefined
+          ) : (
+            <div style={{ marginLeft: 16 }}>{rightExtra}</div>
+          )}
         </Container>
       </header>
     )

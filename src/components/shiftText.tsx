@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import ReactMarkdown from 'react-markdown'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { ColorProperty, TextAlignProperty } from 'csstype'
+import DisplaySlogan from './displaySlogan'
 
 interface Props {
-  slogan?: string[],
-  interval: number,
-  fontColor: ColorProperty,
-  fontSize: number,
+  slogan?: string[]
+  interval: number
+  fontColor: ColorProperty
+  fontSize: number
   textAlign: TextAlignProperty
 }
 
-class ShiftTextComponent extends Component<Props> {
+class ShiftText extends Component<Props> {
   static defaultProps = {
     fontSize: 64,
     fontColor: '#000',
@@ -64,40 +64,25 @@ class ShiftTextComponent extends Component<Props> {
   }
 
   render() {
-    const split = this.state.displayText ? this.state.displayText.split('|') : []
-    const display = []
-    for (let i = 0; i < split.length; i++) {
-      if (i > 0) {
-        display.push(<br key={i * 2 - 1}/>)
-      }
-      display.push(
-        <ReactMarkdown
-          key={i * 2}
-          renderers={{ paragraph: 'span' }}
-          allowedTypes={[
-            'root', 'paragraph', 'emphasis',
-            'strong', 'delete', 'link', 'linkReference',
-            'text',
-          ]}
-          source={split[i]}/>,
-      )
-    }
     return (
-      <div style={{
-        userSelect: 'none',
-        textAlign: this.props.textAlign,
-        fontSize: this.props.fontSize,
-        color: this.props.fontColor,
-      }}>
+      <div
+        style={{
+          userSelect: 'none',
+          textAlign: this.props.textAlign,
+          fontSize: this.props.fontSize,
+          color: this.props.fontColor,
+        }}
+      >
         <ReactCSSTransitionGroup
           transitionLeaveTimeout={this.props.interval * 1000 * 0.2}
           transitionEnterTimeout={this.props.interval * 1000 * 0.2}
-          transitionName='fade'>
-          {display}
+          transitionName="fade"
+        >
+          <DisplaySlogan displayText={this.state.displayText} />
         </ReactCSSTransitionGroup>
       </div>
     )
   }
 }
 
-export default ShiftTextComponent
+export default ShiftText

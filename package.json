@@ -39,6 +39,7 @@
     "@types/redux-logger": "^3.0.7",
     "@types/styled-components": "^4.1.16",
     "gh-pages": "^2.0.1",
+    "prettier": "^1.18.2",
     "redux-devtools": "^3.4.1",
     "tslint": "^5.17.0",
     "tslint-jike-node": "^0.0.17",
@@ -52,7 +53,9 @@
     "clean": "rm -r node_modules && rm yarn.lock",
     "predeploy": "npm run build",
     "lint": "tslint --project .",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "prettier": "prettier --check \"src/**/*\" --write",
+    "fix-lint": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'"
   },
   "browserslist": {
     "production": [

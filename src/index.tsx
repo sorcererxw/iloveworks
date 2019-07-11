@@ -13,9 +13,10 @@ const store = configureStore()
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistStore(store)}>
-      <App/>
+      <App />
     </PersistGate>
   </Provider>,
-  document.getElementById('root'))
+  document.getElementById('root'),
+)
 
 ServiceWorker.register()

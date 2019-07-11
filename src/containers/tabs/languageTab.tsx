@@ -24,8 +24,8 @@ const Select = styled.select`
 `
 
 interface Props {
-  theme: string,
-  language: string,
+  theme: string
+  language: string
 
   updateLanguage(theme: string): AnyAction
 }
@@ -46,13 +46,14 @@ export default class LanguageTab extends Component<Props> {
               color: scheme.textPrimary,
             }}
             value={this.props.language}
-            onChange={this.onSelect}>
+            onChange={this.onSelect}
+          >
             <FormattedMessage id={'settings.language.default'}>
-              {text => <option value=''>{text}</option>}
+              {text => <option value="">{text}</option>}
             </FormattedMessage>
-            <option value='zh-Hans'>简体中文</option>
-            <option value='zh-Hant'>正體中文</option>
-            <option value='en-US'>English</option>
+            <option value="zh-Hans">简体中文</option>
+            <option value="zh-Hant">正體中文</option>
+            <option value="en-US">English</option>
           </Select>
         </PreferenceItem>
       </PreferenceGroup>

@@ -31,7 +31,7 @@ const ButtonBar = styled.div`
   margin-top: 16px;
   margin-bottom: 8px;
 
-  >button {
+  > button {
     margin: 8px;
     font-size: 1rem;
     font-weight: 500;
@@ -53,8 +53,8 @@ interface Props {
 }
 
 interface State {
-  text: string,
-  showSyntax: boolean,
+  text: string
+  showSyntax: boolean
 }
 
 export default class SloganTab extends Component<Props, State> {
@@ -133,72 +133,83 @@ export default class SloganTab extends Component<Props, State> {
                 color: scheme.textPrimary,
               }}
             />
-            <div style={{
-              paddingRight: 16,
-              paddingLeft: 16,
-              userSelect: 'none',
-              color: scheme.textSecondary,
-              fontSize: '0.8rem',
-            }}>
+            <div
+              style={{
+                paddingRight: 16,
+                paddingLeft: 16,
+                userSelect: 'none',
+                color: scheme.textSecondary,
+                fontSize: '0.8rem',
+              }}
+            >
               <div
                 onClick={this.onSyntaxArrowClick}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                }}>
-                <FormattedMessage id={'settings.slogan.syntax'}/>
-                {
-                  this.state.showSyntax ?
-                    <MdArrowDropUp style={{
+                }}
+              >
+                <FormattedMessage id={'settings.slogan.syntax'} />
+                {this.state.showSyntax ? (
+                  <MdArrowDropUp
+                    style={{
                       verticalAlign: 'middle',
                       marginLeft: 4,
                       fontSize: '1rem',
-                    }}/>
-                    : <MdArrowDropDown style={{
+                    }}
+                  />
+                ) : (
+                  <MdArrowDropDown
+                    style={{
                       verticalAlign: 'middle',
                       marginLeft: 4,
                       fontSize: '1rem',
-                    }}/>
-                }
+                    }}
+                  />
+                )}
               </div>
-              {this.state.showSyntax ?
+              {this.state.showSyntax ? (
                 <div>
                   <FormattedMessage id={'settings.slogan.syntax.summary'}>
-                    {
-                      text => {
-                        if (typeof text !== 'string') {
-                          return null
-                        }
-                        return <ReactMarkdown
-                          renderers={{ paragraph: 'div' }}
-                          source={text}/>
+                    {text => {
+                      if (typeof text !== 'string') {
+                        return null
                       }
-                    }
+                      return <ReactMarkdown renderers={{ paragraph: 'div' }} source={text} />
+                    }}
                   </FormattedMessage>
-                </div> : undefined
-              }
+                </div>
+              ) : (
+                undefined
+              )}
             </div>
           </div>
-          <div style={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-          }}>
-            <div style={{ flex: 1 }}/>
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'row',
+            }}
+          >
+            <div style={{ flex: 1 }} />
             <ButtonBar className={'button-bar'}>
-              <button onClick={this.onReset}
-                      style={{
-                        backgroundColor: scheme.primary,
-                        color: scheme.textPrimary,
-                      }}>
-                <FormattedMessage id={'action.reset'}/>
+              <button
+                onClick={this.onReset}
+                style={{
+                  backgroundColor: scheme.primary,
+                  color: scheme.textPrimary,
+                }}
+              >
+                <FormattedMessage id={'action.reset'} />
               </button>
-              <button onClick={this.onSave}
-                      style={{
-                        backgroundColor: scheme.primary,
-                        color: scheme.textPrimary,
-                      }}>
-                <FormattedMessage id={'action.save'}/>
+              <button
+                onClick={this.onSave}
+                style={{
+                  backgroundColor: scheme.primary,
+                  color: scheme.textPrimary,
+                }}
+              >
+                <FormattedMessage id={'action.save'} />
               </button>
             </ButtonBar>
           </div>
@@ -206,10 +217,6 @@ export default class SloganTab extends Component<Props, State> {
       </PreferenceGroup>
     )
 
-    return (
-      <div>
-        {customTab}
-      </div>
-    )
+    return <div>{customTab}</div>
   }
 }

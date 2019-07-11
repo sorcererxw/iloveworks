@@ -26,7 +26,7 @@ const ThemeBlockSelection = styled.div`
 `
 
 interface Props {
-  theme?: string,
+  theme?: string
 
   updateTheme(theme: string): AnyAction
 }
@@ -41,20 +41,19 @@ class AppearanceTab extends Component<Props> {
     const themeBlock = (titleId: string, value: string) => {
       return (
         <ThemeBlockContainer
-          onClick={
-            (
-              (handle, v) => () => handle(v)
-            )(updateTheme, value)
-          }
+          onClick={((handle, v) => () => handle(v))(updateTheme, value)}
           style={{
             borderColor: hexToRgbA(scheme.textSecondary, 0.2),
             color: getTheme(value).textPrimary,
             backgroundColor: getTheme(value).background,
-          }}>
-          <FormattedMessage id={titleId}/>
-          <ThemeBlockSelection style={{
-            backgroundColor: value === theme ? scheme.accent : 'transparent',
-          }}/>
+          }}
+        >
+          <FormattedMessage id={titleId} />
+          <ThemeBlockSelection
+            style={{
+              backgroundColor: value === theme ? scheme.accent : 'transparent',
+            }}
+          />
         </ThemeBlockContainer>
       )
     }
@@ -62,7 +61,7 @@ class AppearanceTab extends Component<Props> {
     return (
       <div>
         <FormattedMessage id={'settings.appearance.theme'}>
-          {text =>
+          {text => (
             <PreferenceGroup title={text}>
               <PreferenceItem>
                 <div style={{ width: '100%' }}>
@@ -74,7 +73,7 @@ class AppearanceTab extends Component<Props> {
                 </div>
               </PreferenceItem>
             </PreferenceGroup>
-          }
+          )}
         </FormattedMessage>
       </div>
     )
