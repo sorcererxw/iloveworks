@@ -26,11 +26,11 @@
     "styled-components": "^4.2.1"
   },
   "devDependencies": {
-    "@types/jest": "24.0.13",
-    "@types/node": "12.0.4",
-    "@types/react": "16.8.19",
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.4",
+    "@types/react": "^16.8.19",
     "@types/react-addons-css-transition-group": "^15.0.5",
-    "@types/react-dom": "16.8.4",
+    "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.8",
     "@types/react-intl": "^2.3.18",
     "@types/react-redux": "^7.0.9",
@@ -43,14 +43,14 @@
     "redux-devtools": "^3.4.1",
     "tslint": "^5.17.0",
     "tslint-jike-node": "^0.0.17",
-    "typescript": "3.5.1"
+    "typescript": "^3.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "npm run lint && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "clean": "rm -r node_modules && rm yarn.lock",
+    "clean": "rm -r node_modules && rm package-lock.json",
     "predeploy": "npm run build",
     "lint": "tslint --project .",
     "deploy": "gh-pages -d build",
