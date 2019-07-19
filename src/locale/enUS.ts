@@ -26,7 +26,7 @@ Manager call me to sleep | I refuse strongly`,
   'settings.slogan': 'Slogan',
   'settings.slogan.syntax': 'Syntax description',
   'settings.slogan.syntax.summary': `
-One line statement is a paragraph, use \'|\' to perform line break
+One line statement is a paragraph, use '|' to perform line break
 
 And you can use some basic Markdown inline syntax:
 

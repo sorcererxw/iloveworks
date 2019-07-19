@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import ShiftText from '../components/shiftText'
 import './homePage.css'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getTheme } from '../theme'
-import { InjectedIntl, defineMessages, injectIntl } from 'react-intl'
+import { defineMessages, InjectedIntl, injectIntl } from 'react-intl'
 import AppHeader from '../components/appHeader'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { MdSettings } from 'react-icons/md'
 import styled from 'styled-components'
 import { getQueryParamsFromUrl } from '../utils/urlUtil'
+import TypingText from '../components/typingText'
 
 const Root = styled.div`
   justify-content: center;
@@ -121,7 +121,7 @@ class HomePage extends Component<Props, State> {
           {this.state.idle ? (
             undefined
           ) : (
-            <AppHeader style={{ position: 'absolute', top: 0 }} rightExtra={settingsIcon} />
+            <AppHeader style={{ position: 'absolute', top: 0 }} rightExtra={settingsIcon}/>
           )}
         </ReactCSSTransitionGroup>
         <main
@@ -133,7 +133,7 @@ class HomePage extends Component<Props, State> {
             justifyContent: 'center',
           }}
         >
-          <ShiftText
+          <TypingText
             textAlign={'center'}
             fontColor={palette.textPrimary}
             fontSize={72}

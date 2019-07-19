@@ -11,7 +11,7 @@ interface Props {
   textAlign: TextAlignProperty
 }
 
-class ShiftText extends Component<Props> {
+class FadeText extends Component<Props> {
   static defaultProps = {
     fontSize: 64,
     fontColor: '#000',
@@ -21,6 +21,7 @@ class ShiftText extends Component<Props> {
   }
 
   index = 0
+  timer: number | undefined = undefined
 
   state = {
     displayText: '',
@@ -32,38 +33,38 @@ class ShiftText extends Component<Props> {
       this.setState({
         displayText: '',
       })
+      return
+    }
+    const mod = this.index % (slogan.length * 2)
+    if (mod % 2 === 1) {
+      this.setState({
+        displayText: '',
+      })
     } else {
-      if (this.index >= slogan.length * 2) {
-        this.index = 0
-      }
-      if (this.index % 2 === 1) {
-        this.setState({
-          displayText: '',
-        })
-        setTimeout(() => this.updateIndex(), this.props.interval * 1000 * 0.2)
-      } else {
-        this.setState({
-          displayText: slogan[this.index / 2],
-        })
-      }
-      this.index++
+      this.setState({
+        displayText: slogan[mod / 2],
+      })
+    }
+    this.index++
+    if (this.state.displayText.length === 0) {
+      this.timer = setTimeout(() => this.updateIndex(), this.props.interval * 1000 * 0.2)
+    } else {
+      this.timer = setTimeout(() => this.updateIndex(), this.props.interval * 1000)
     }
   }
 
-  timer: number | undefined = undefined
-
   componentDidMount() {
     this.updateIndex()
-    this.timer = setInterval(this.updateIndex, this.props.interval * 1000)
   }
 
   componentWillUnmount() {
     if (this.timer !== undefined) {
-      clearInterval(this.timer)
+      clearTimeout(this.timer)
     }
   }
 
   render() {
+    console.log(this.state.displayText)
     return (
       <div
         style={{
@@ -78,11 +79,11 @@ class ShiftText extends Component<Props> {
           transitionEnterTimeout={this.props.interval * 1000 * 0.2}
           transitionName='fade'
         >
-          <DisplaySlogan displayText={this.state.displayText} />
+          <DisplaySlogan key={this.index} displayText={this.state.displayText}/>
         </ReactCSSTransitionGroup>
       </div>
     )
   }
 }
 
-export default ShiftText
+export default FadeText

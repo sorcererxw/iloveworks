@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import TypingCursor from './typingCursor'
 
 class DisplaySlogan extends React.Component<{
-  displayText: string
+  displayText: string,
+  showCursor?: boolean
 }> {
   render():
     | React.ReactElement<any, string | React.JSXElementConstructor<any>>
@@ -18,27 +20,43 @@ class DisplaySlogan extends React.Component<{
     const display = []
     for (let i = 0; i < split.length; i++) {
       if (i > 0) {
-        display.push(<br key={i * 2 - 1} />)
+        display.push(<br key={i * 2 - 1}/>)
       }
-      display.push(
-        <ReactMarkdown
-          key={i * 2}
-          renderers={{ paragraph: 'span' }}
-          allowedTypes={[
-            'root',
-            'paragraph',
-            'emphasis',
-            'strong',
-            'delete',
-            'link',
-            'linkReference',
-            'text',
-          ]}
-          source={split[i]}
-        />,
-      )
+      const markdown = <ReactMarkdown
+        key={i * 2}
+        renderers={{ paragraph: 'span' }}
+        allowedTypes={[
+          'root',
+          'paragraph',
+          'emphasis',
+          'strong',
+          'delete',
+          'link',
+          'linkReference',
+          'text',
+        ]}
+        source={split[i]}
+      />
+      if (i === split.length - 1 && this.props.showCursor) {
+        display.push(
+          <span style={{
+            display: 'flex',
+            flexDirection: 'row',
+          }}>
+            {markdown}
+            <TypingCursor/>
+          </span>,
+        )
+      } else {
+        display.push(
+          <span>{markdown}</span>,
+        )
+      }
     }
-    return display
+    if (display.length === 0 && this.props.showCursor) {
+      display.push(<span><TypingCursor/></span>)
+    }
+    return <div>{display}</div>
   }
 }
 
