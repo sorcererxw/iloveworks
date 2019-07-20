@@ -20,7 +20,7 @@ class TypingText extends Component<Props> {
   }
 
   targetText = ''
-  index = 0
+  index = -1
   timer: number | undefined = undefined
 
   state = {
@@ -37,10 +37,20 @@ class TypingText extends Component<Props> {
       return
     }
     if (this.state.displayText === this.targetText) {
-      if (this.targetText.length > 0) {
-        this.targetText = ''
+      if (this.index > 0 && this.targetText === slogan[this.index % slogan.length]) {
+        const nowSlogan = slogan[this.index % slogan.length]
+        const nextSlogan = slogan[(this.index + 1) % slogan.length]
+        let sameIdx = 0
+        for (let i = 0; i < Math.min(nowSlogan.length, nextSlogan.length); i++) {
+          if (nowSlogan[i] === nextSlogan[i]) {
+            sameIdx++
+          } else {
+            break
+          }
+        }
+        this.targetText = nowSlogan.slice(0, sameIdx)
       } else {
-        this.targetText = slogan[this.index++ % slogan.length]
+        this.targetText = slogan[++this.index % slogan.length]
       }
     }
 
@@ -59,7 +69,7 @@ class TypingText extends Component<Props> {
       target: this.targetText,
     })
 
-    if (this.targetText === text) {
+    if (this.targetText === text && text === slogan[this.index % slogan.length]) {
       this.timer = setTimeout(
         () => this.updateIndex(),
         this.props.interval * 1000,
