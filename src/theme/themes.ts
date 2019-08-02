@@ -44,3 +44,12 @@ export const ChromeDark = {
   textPrimary: '#f1f3f4',
   textSecondary: '#9ba0a5',
 } as Theme
+
+export const JikeYellow = {
+  primary: '#fff',
+  primaryDark: '#fff',
+  accent: '#72b2ed',
+  background: '#fbe44f',
+  textPrimary: '#444444',
+  textSecondary: '#535353',
+}

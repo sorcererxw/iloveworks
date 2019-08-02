@@ -1,4 +1,4 @@
-import { Black, Dark, White, Light, ChromeDark } from './themes'
+import { Black, Dark, White, Light, ChromeDark, JikeYellow } from './themes'
 import { ColorProperty } from 'csstype'
 
 export interface Theme {
@@ -22,6 +22,8 @@ export function getTheme(theme?: string): Theme {
       return Black
     case 'chrome-dark':
       return ChromeDark
+    case 'jike-yellow':
+      return JikeYellow
     default:
       return Light
   }

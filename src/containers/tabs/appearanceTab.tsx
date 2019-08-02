@@ -70,6 +70,7 @@ class AppearanceTab extends Component<Props> {
                   {themeBlock('settings.appearance.theme.dark', 'dark')}
                   {themeBlock('settings.appearance.theme.black', 'black')}
                   {themeBlock('settings.appearance.theme.chrome-dark', 'chrome-dark')}
+                  {themeBlock('settings.appearance.theme.jike-yellow', 'jike-yellow')}
                 </div>
               </PreferenceItem>
             </PreferenceGroup>

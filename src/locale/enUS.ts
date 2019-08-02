@@ -44,4 +44,5 @@ And you can use some basic Markdown inline syntax:
   'settings.appearance.theme.light': 'Light',
   'settings.appearance.theme.dark': 'Dark',
   'settings.appearance.theme.chrome-dark': 'Chrome Dark',
+  'settings.appearance.theme.jike-yellow': 'Jike Yellow',
 } as I18n

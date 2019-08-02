@@ -26,4 +26,5 @@ export default interface I18n {
   'settings.appearance.theme.light': string
   'settings.appearance.theme.dark': string
   'settings.appearance.theme.chrome-dark': string
+  'settings.appearance.theme.jike-yellow': string
 }
