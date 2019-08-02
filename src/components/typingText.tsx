@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { ColorProperty, TextAlignProperty } from 'csstype'
 import DisplaySlogan from './displaySlogan'
+import { hexToRgbA } from '../utils/colorUtil'
 
 interface Props {
   slogan?: string[]
   interval: number
-  fontColor: ColorProperty
+  textColor: ColorProperty
+  secondaryTextColor: ColorProperty
   fontSize: number
   textAlign: TextAlignProperty
 }
@@ -100,10 +102,13 @@ class TypingText extends Component<Props> {
           userSelect: 'none',
           textAlign: this.props.textAlign,
           fontSize: this.props.fontSize,
-          color: this.props.fontColor,
+          color: this.props.textColor,
         }}
       >
-        <DisplaySlogan showCursor={true} displayText={this.state.displayText}/>
+        <DisplaySlogan
+          textColor={this.props.textColor}
+          secondaryTextColor={hexToRgbA(this.props.textColor, 0.6)}
+          showCursor={true} displayText={this.state.displayText}/>
       </div>
     )
   }

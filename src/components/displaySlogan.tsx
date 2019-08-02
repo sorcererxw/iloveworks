@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import TypingCursor from './typingCursor'
+import { ColorProperty } from 'csstype'
 
 class DisplaySlogan extends React.Component<{
+  textColor: ColorProperty
+  secondaryTextColor: ColorProperty
   displayText: string,
   showCursor?: boolean
 }> {
@@ -42,9 +45,10 @@ class DisplaySlogan extends React.Component<{
           <span style={{
             display: 'flex',
             flexDirection: 'row',
+            alignItems: 'center',
           }}>
             {markdown}
-            <TypingCursor/>
+            <TypingCursor color={this.props.secondaryTextColor}/>
           </span>,
         )
       } else {
@@ -54,7 +58,13 @@ class DisplaySlogan extends React.Component<{
       }
     }
     if (display.length === 0 && this.props.showCursor) {
-      display.push(<span><TypingCursor/></span>)
+      display.push(
+        <span style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}><TypingCursor color={this.props.secondaryTextColor}/></span>,
+      )
     }
     return <div>{display}</div>
   }

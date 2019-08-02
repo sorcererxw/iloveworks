@@ -51,5 +51,5 @@ export const JikeYellow = {
   accent: '#72b2ed',
   background: '#fbe44f',
   textPrimary: '#444444',
-  textSecondary: '#535353',
+  textSecondary: '#5f5f5f',
 }

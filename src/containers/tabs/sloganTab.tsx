@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { InjectedIntl, defineMessages, FormattedMessage } from 'react-intl'
+import { defineMessages, FormattedMessage, InjectedIntl } from 'react-intl'
 import { getTheme } from '../../theme'
 import PreferenceGroup from '../../components/preferenceGroup'
 import PreferenceItem from '../../components/preferenceItem'
@@ -149,7 +149,7 @@ export default class SloganTab extends Component<Props, State> {
                   alignItems: 'center',
                 }}
               >
-                <FormattedMessage id={'settings.slogan.syntax'} />
+                <FormattedMessage id={'settings.slogan.syntax'}/>
                 {this.state.showSyntax ? (
                   <MdArrowDropUp
                     style={{
@@ -175,13 +175,11 @@ export default class SloganTab extends Component<Props, State> {
                       if (typeof text !== 'string') {
                         return null
                       }
-                      return <ReactMarkdown renderers={{ paragraph: 'div' }} source={text} />
+                      return <ReactMarkdown renderers={{ paragraph: 'div' }} source={text}/>
                     }}
                   </FormattedMessage>
                 </div>
-              ) : (
-                undefined
-              )}
+              ) : undefined}
             </div>
           </div>
           <div
@@ -191,7 +189,7 @@ export default class SloganTab extends Component<Props, State> {
               flexDirection: 'row',
             }}
           >
-            <div style={{ flex: 1 }} />
+            <div style={{ flex: 1 }}/>
             <ButtonBar className={'button-bar'}>
               <button
                 onClick={this.onReset}
@@ -200,7 +198,7 @@ export default class SloganTab extends Component<Props, State> {
                   color: scheme.textPrimary,
                 }}
               >
-                <FormattedMessage id={'action.reset'} />
+                <FormattedMessage id={'action.reset'}/>
               </button>
               <button
                 onClick={this.onSave}
@@ -209,7 +207,7 @@ export default class SloganTab extends Component<Props, State> {
                   color: scheme.textPrimary,
                 }}
               >
-                <FormattedMessage id={'action.save'} />
+                <FormattedMessage id={'action.save'}/>
               </button>
             </ButtonBar>
           </div>

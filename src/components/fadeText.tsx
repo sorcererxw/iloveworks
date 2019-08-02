@@ -6,6 +6,8 @@ import DisplaySlogan from './displaySlogan'
 interface Props {
   slogan?: string[]
   interval: number
+  textColor: ColorProperty
+  secondaryTextColor: ColorProperty
   fontColor: ColorProperty
   fontSize: number
   textAlign: TextAlignProperty
@@ -79,7 +81,10 @@ class FadeText extends Component<Props> {
           transitionEnterTimeout={this.props.interval * 1000 * 0.2}
           transitionName='fade'
         >
-          <DisplaySlogan key={this.index} displayText={this.state.displayText}/>
+          <DisplaySlogan
+            textColor={this.props.textColor}
+            secondaryTextColor={this.props.secondaryTextColor}
+            key={this.index} displayText={this.state.displayText}/>
         </ReactCSSTransitionGroup>
       </div>
     )

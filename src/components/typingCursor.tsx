@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import styled from 'styled-components'
+import { ColorProperty } from 'csstype'
+
+interface Props {
+  color: ColorProperty
+}
 
 const Cursor = styled.span`
-  border-width: 0px;
-  border-right-width: 0.2em;
+  border-color: ${props => props.color};
+  color: ${props => props.color};
+  border-width: 0;
+  border-right-width: 0.15em;
   height: 100%;
   width: 0.2em;
   border-style: solid;
@@ -13,7 +20,7 @@ const Cursor = styled.span`
   padding-right: 0.1em;
 `
 
-class TypingCursor extends Component {
+class TypingCursor extends Component<Props> {
   timer: number | undefined = undefined
 
   state = {
@@ -45,7 +52,7 @@ class TypingCursor extends Component {
         transitionName='fade'
       >
         {
-          this.state.display ? <Cursor/> : null
+          this.state.display ? <Cursor color={this.props.color}/> : null
         }
       </ReactCSSTransitionGroup>
     )
