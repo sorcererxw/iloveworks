@@ -38,7 +38,7 @@
     "@types/react-router-dom": "^4.3.3",
     "@types/redux-logger": "^3.0.7",
     "@types/styled-components": "^4.1.16",
-    "gh-pages": "^2.0.1",
+    "gh-pages": "2.0.1",
     "prettier": "^1.18.2",
     "redux-devtools": "^3.4.1",
     "tslint": "^5.17.0",
