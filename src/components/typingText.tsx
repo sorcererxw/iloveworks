@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { ColorProperty, TextAlignProperty } from 'csstype'
 import DisplaySlogan from './displaySlogan'
-import { hexToRgbA } from '../utils/colorUtil'
 
 interface Props {
   slogan?: string[]
   interval: number
   textColor: ColorProperty
-  secondaryTextColor: ColorProperty
   fontSize: number
   textAlign: TextAlignProperty
 }
@@ -72,16 +70,10 @@ class TypingText extends Component<Props> {
     })
 
     if (this.targetText === text && text === slogan[this.index % slogan.length]) {
-      this.timer = setTimeout(
-        () => this.updateIndex(),
-        this.props.interval * 1000,
-      )
+      this.timer = setTimeout(() => this.updateIndex(), this.props.interval * 1000)
       console.log('wait more')
     } else {
-      this.timer = setTimeout(
-        () => this.updateIndex(),
-        this.props.interval * 200 * 0.2,
-      )
+      this.timer = setTimeout(() => this.updateIndex(), this.props.interval * 200 * 0.2)
     }
   }
 
@@ -107,8 +99,9 @@ class TypingText extends Component<Props> {
       >
         <DisplaySlogan
           textColor={this.props.textColor}
-          secondaryTextColor={hexToRgbA(this.props.textColor, 0.6)}
-          showCursor={true} displayText={this.state.displayText}/>
+          showCursor={true}
+          displayText={this.state.displayText}
+        />
       </div>
     )
   }

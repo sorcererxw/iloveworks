@@ -7,8 +7,6 @@ interface Props {
   slogan?: string[]
   interval: number
   textColor: ColorProperty
-  secondaryTextColor: ColorProperty
-  fontColor: ColorProperty
   fontSize: number
   textAlign: TextAlignProperty
 }
@@ -73,7 +71,7 @@ class FadeText extends Component<Props> {
           userSelect: 'none',
           textAlign: this.props.textAlign,
           fontSize: this.props.fontSize,
-          color: this.props.fontColor,
+          color: this.props.textColor,
         }}
       >
         <ReactCSSTransitionGroup
@@ -83,8 +81,9 @@ class FadeText extends Component<Props> {
         >
           <DisplaySlogan
             textColor={this.props.textColor}
-            secondaryTextColor={this.props.secondaryTextColor}
-            key={this.index} displayText={this.state.displayText}/>
+            key={this.index}
+            displayText={this.state.displayText}
+          />
         </ReactCSSTransitionGroup>
       </div>
     )

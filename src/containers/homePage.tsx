@@ -118,8 +118,11 @@ class HomePage extends Component<Props, State> {
           transitionEnterTimeout={300}
           transitionName='fade'
         >
-          {this.state.idle ? undefined :
-            <AppHeader style={{ position: 'absolute', top: 0 }} rightExtra={settingsIcon}/>}
+          {this.state.idle ? (
+            undefined
+          ) : (
+            <AppHeader style={{ position: 'absolute', top: 0 }} rightExtra={settingsIcon} />
+          )}
         </ReactCSSTransitionGroup>
         <main
           style={{
@@ -133,7 +136,6 @@ class HomePage extends Component<Props, State> {
           <TypingText
             textAlign={'center'}
             textColor={palette.textPrimary}
-            secondaryTextColor={palette.textSecondary}
             fontSize={72}
             slogan={this.getSlogan()}
           />

@@ -51,9 +51,7 @@ class TypingCursor extends Component<Props> {
         transitionEnterTimeout={500}
         transitionName='fade'
       >
-        {
-          this.state.display ? <Cursor color={this.props.color}/> : null
-        }
+        {this.state.display ? <Cursor color={this.props.color} /> : null}
       </ReactCSSTransitionGroup>
     )
   }
